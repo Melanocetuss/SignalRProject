@@ -70,5 +70,12 @@ namespace SignalRApi.Controllers
             });
             return Ok("Ürün Güncellendi");
         }
+
+        [HttpGet("GetProductWithCategories")]
+        public IActionResult GetProductWithCategories()
+        {
+            var value = _mapper.Map<List<ResultProductWithCategoriesDto>>(_productService.TGetProductWithCategories());
+            return Ok(value);
+        }
     }
 }
