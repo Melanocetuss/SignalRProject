@@ -8,11 +8,11 @@ namespace SignalRApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeaeturesController : ControllerBase
+    public class FeaturesController : ControllerBase
     {
         private readonly IFeatureService _featureService;
         private readonly IMapper _mapper;
-        public FeaeturesController(IFeatureService FeatureService, IMapper mapper)
+        public FeaturesController(IFeatureService FeatureService, IMapper mapper)
         {
             _featureService = FeatureService;
             _mapper = mapper;
