@@ -1,0 +1,49 @@
+﻿@model CreateBookingDto
+@{
+    ViewData["Title"] = "CreateBooking";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Rezervasyon İşelemleri</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<form method="post">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Yeni Rezervasyon Girişi</div>
+						</div>
+						<div class="card-body">
+
+							<div class="form-group">
+								<label for="bookingname">Ad Soyad Giriniz</label>
+								<input type="text" class="form-control" id="bookingname" asp-for="Name">
+							</div>
+							<div class="form-group">
+								<label for="bookingphone">Telefon Giriniz</label>
+								<input type="text" class="form-control" id="bookingphone" asp-for="Phone">
+							</div>
+							<div class="form-group">
+								<label for="bookingmail">Mail Giriniz</label>
+								<input type="email" class="form-control" id="bookingmail" asp-for="Email">
+							</div>
+							<div class="form-group">
+								<label for="bookingpersonCount">Kişi Sayısı</label>
+								<input type="number" class="form-control" id="bookingpersonCount" asp-for="PersonCount">
+							</div>
+							<div class="form-group">
+								<label for="bookingdate">Rezervasyon Tarihi</label>
+								<input type="date" class="form-control" id="bookingdate" asp-for="Date">
+							</div>
+							<div class="card-action">
+								<button class="btn btn-primary">Rezervasyon Oluştur</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>		
