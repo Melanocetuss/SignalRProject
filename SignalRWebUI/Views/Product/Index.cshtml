@@ -2,7 +2,6 @@
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/AdminLayout/Index.cshtml";
-	int count = 0;
 }
 
 <div class="content">
@@ -21,7 +20,6 @@
 						<table class="table mt-3">
 							<thead>
 								<tr>
-									<th scope="col">#</th>
 									<th scope="col">Resim Ve Ürün Adı</th>
 									<th scope="col">Fiyat</th>
 									<th scope="col">Kategori Adı</th>
@@ -34,9 +32,7 @@
 
 								@foreach (var item in Model)
 								{
-                                    count++;
 									<tr>
-										<td>@count</td>
 										<td><img src="@item.ImageUrl" width="50" height="50" style="margin-right:10px" />@item.Name</td>
 										<td>@item.Price ₺</td>
 										<td>@item.CategoryName</td>

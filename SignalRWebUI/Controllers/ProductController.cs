@@ -33,7 +33,7 @@ namespace SignalRWebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
-            ViewBag.v = await GetCategoryListAsync();
+            ViewBag.Category = await GetCategoryListAsync();
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace SignalRWebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(int id)
         {
-            ViewBag.v = await GetCategoryListAsync();
+            ViewBag.Category = await GetCategoryListAsync();
             var client = _clientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7274/api/Products/GetProduct?id={id}");
 
