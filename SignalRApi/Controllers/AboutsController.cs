@@ -35,12 +35,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            _aboutService.TAdd(new About() 
-            {
-                Title = createAboutDto.Title,
-                Description = createAboutDto.Description,
-                ImageUrl = createAboutDto.ImageUrl
-            });
+            var aboutEntity = _mapper.Map<About>(createAboutDto);
+            _aboutService.TAdd(aboutEntity);
             return Ok("Hakkımızda Eklendi");
         }
 
@@ -55,13 +51,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            _aboutService.TUpdate(new About()
-            {
-                AboutID = updateAboutDto.AboutID,
-                Title = updateAboutDto.Title,
-                Description = updateAboutDto.Description,
-                ImageUrl = updateAboutDto.ImageUrl
-            });
+            var aboutEntity = _mapper.Map<About>(updateAboutDto);
+            _aboutService.TUpdate(aboutEntity);
             return Ok("Hakkımızda Güncellendi");
         }
     }

@@ -36,14 +36,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
-
-            _contactService.TAdd(new Contact()
-            {
-                Location = createContactDto.Location,
-                Phone = createContactDto.Phone,
-                Email = createContactDto.Email,
-                Description = createContactDto.Description
-            });
+            var contactEntity = _mapper.Map<Contact>(createContactDto);
+            _mapper.Map<Contact>(createContactDto);
             return Ok("İletişim Eklendi");
         }
 
@@ -58,14 +52,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
-            _contactService.TUpdate(new Contact()
-            {
-                ContactID = updateContactDto.ContactID,
-                Location = updateContactDto.Location,
-                Phone = updateContactDto.Phone,
-                Email = updateContactDto.Email,
-                Description = updateContactDto.Description
-            });
+            var contactEntity = _mapper.Map<Contact>(updateContactDto);
+            _contactService.TUpdate(contactEntity);
             return Ok("İletişim Güncellendi");
         }
     }

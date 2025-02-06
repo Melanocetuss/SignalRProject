@@ -37,14 +37,8 @@ namespace SignalRApi.Controllers
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
 
-            _testimonialService.TAdd(new Testimonial()
-            {
-                Name = createTestimonialDto.Name,
-                Title = createTestimonialDto.Title,
-                Comment = createTestimonialDto.Comment,
-                ImageUrl = createTestimonialDto.ImageUrl,
-                Status = createTestimonialDto.Status
-            });
+            var testimonialEntity = _mapper.Map<Testimonial>(createTestimonialDto);
+            _testimonialService.TAdd(testimonialEntity);
             return Ok("Referans Eklendi");
         }
 
@@ -59,15 +53,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
-            _testimonialService.TUpdate(new Testimonial()
-            {
-                TestimonialID = updateTestimonialDto.TestimonialID,
-                Name = updateTestimonialDto.Name,
-                Title = updateTestimonialDto.Title,
-                Comment = updateTestimonialDto.Comment,
-                ImageUrl = updateTestimonialDto.ImageUrl,
-                Status = updateTestimonialDto.Status
-            });
+            var testimonialEntity = _mapper.Map<Testimonial>(updateTestimonialDto);
+            _testimonialService.TUpdate(testimonialEntity);
             return Ok("Referans Güncellendi");
         }
     }

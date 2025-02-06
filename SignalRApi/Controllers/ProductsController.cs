@@ -36,17 +36,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-
-            _productService.TAdd(new Product()
-            {
-                Name = createProductDto.Name,
-                Description = createProductDto.Description,
-                Price = createProductDto.Price,
-                ImageUrl = createProductDto.ImageUrl,
-                Status = createProductDto.Status,
-                CategoryID = createProductDto.CategoryID
-
-            });
+            var productEntity = _mapper.Map<Product>(createProductDto);
+            _productService.TAdd(productEntity);
             return Ok("Ürün Eklendi");
         }
 
@@ -61,16 +52,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            _productService.TUpdate(new Product()
-            {
-                ProductID = updateProductDto.ProductID,
-                Name = updateProductDto.Name,
-                Description = updateProductDto.Description,
-                Price = updateProductDto.Price,
-                ImageUrl = updateProductDto.ImageUrl,
-                Status = updateProductDto.Status,
-                CategoryID = updateProductDto.CategoryID
-            });
+            var productEntity = _mapper.Map<Product>(updateProductDto);
+            _productService.TUpdate(productEntity);
             return Ok("Ürün Güncellendi");
         }
 
@@ -79,6 +62,48 @@ namespace SignalRApi.Controllers
         {
             var value = _mapper.Map<List<ResultProductWithCategoriesDto>>(_productService.TGetProductWithCategories());
             return Ok(value);
+        }
+
+        [HttpGet("ProductCount")]
+        public IActionResult ProductCount()
+        {
+            return Ok(_productService.TProductCount());
+        }
+
+        [HttpGet("ProductCountByCategoryNameHamburger")]
+        public IActionResult ProductCountByCategoryNameHamburger()
+        {
+            return Ok(_productService.TProductCountByCategoryNameHamburger());
+        }
+
+        [HttpGet("ProductCountByCategoryNameDrink")]
+        public IActionResult ProductCountByCategoryNameDrink()
+        {
+            return Ok(_productService.TProductCountByCategoryNameDrink());
+        }
+
+        [HttpGet("ProductAveragePrice")]
+        public IActionResult ProductAveragePrice()
+        {
+            return Ok(_productService.TProductAveragePrice());
+        }
+
+        [HttpGet("ProductMaxPrice")]
+        public IActionResult ProductMaxPrice()
+        {
+            return Ok(_productService.TProductMaxPrice());
+        }
+
+        [HttpGet("ProductMinPrice")]
+        public IActionResult ProductMinPrice()
+        {
+            return Ok(_productService.TProductMinPrice());
+        }
+
+        [HttpGet("ProductAveragePriceByCategoryNameHamburger")]
+        public IActionResult ProductPrice() 
+        {
+            return Ok(_productService.TProductAveragePriceByCategoryNameHamburger());
         }
     }
 }

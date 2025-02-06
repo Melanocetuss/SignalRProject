@@ -35,16 +35,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateFeature(CreateFeatureDto createFeatureDto)
         {
-
-            _featureService.TAdd(new Feature()
-            {
-                FirstTitle = createFeatureDto.FirstTitle,
-                FirstDescription = createFeatureDto.FirstDescription,
-                SecondTitle = createFeatureDto.SecondTitle,
-                SecondDescription = createFeatureDto.SecondDescription,
-                ThirtTitle = createFeatureDto.ThirtTitle,
-                ThirtDescription = createFeatureDto.ThirtDescription
-            });
+            var featureEntity = _mapper.Map<Feature>(createFeatureDto);
+            _featureService.TAdd(featureEntity);
             return Ok("Öne Çıkan Eklendi");
         }
 
@@ -59,16 +51,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateFeature(UpdateFeatureDto updateFeatureDto)
         {
-            _featureService.TUpdate(new Feature()
-            {
-                FeatureID = updateFeatureDto.FeatureID,
-                FirstTitle = updateFeatureDto.FirstTitle,
-                FirstDescription = updateFeatureDto.FirstDescription,
-                SecondTitle = updateFeatureDto.SecondTitle,
-                SecondDescription = updateFeatureDto.SecondDescription,
-                ThirtTitle = updateFeatureDto.ThirtTitle,
-                ThirtDescription = updateFeatureDto.ThirtDescription          
-            });
+            var featureEntity = _mapper.Map<Feature>(updateFeatureDto);
+            _featureService.TUpdate(featureEntity);
             return Ok("Öne Çıkan Güncellendi");
         }
     }

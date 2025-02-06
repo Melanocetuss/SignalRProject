@@ -36,13 +36,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateSocialMedia(CreateSocialMediaDto createSocialMediaDto)
         {
-
-            _socialMediaService.TAdd(new SocialMedia()
-            {
-                Title = createSocialMediaDto.Title,
-                Url = createSocialMediaDto.Url,
-                Icon = createSocialMediaDto.Icon
-            });
+            var socialMediaEntity = _mapper.Map<SocialMedia>(createSocialMediaDto);
+            _socialMediaService.TAdd(socialMediaEntity);
             return Ok("Sosyal Medya Eklendi");
         }
 
@@ -57,13 +52,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateSocialMedia(UpdateSocialMediaDto updateSocialMediaDto)
         {
-            _socialMediaService.TUpdate(new SocialMedia()
-            {
-                SocialMediaID = updateSocialMediaDto.SocialMediaID,
-                Title = updateSocialMediaDto.Title,               
-                Url = updateSocialMediaDto.Url,
-                Icon = updateSocialMediaDto.Icon
-            });
+            var socialMediaEntity = _mapper.Map<SocialMedia>(updateSocialMediaDto);
+            _socialMediaService.TUpdate(socialMediaEntity);
             return Ok("Sosyal Medya Güncellendi");
         }
     }

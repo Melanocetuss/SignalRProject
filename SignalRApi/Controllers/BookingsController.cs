@@ -35,14 +35,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            _bookingService.TAdd(new Booking()
-            {
-                Name = createBookingDto.Name,
-                Phone = createBookingDto.Phone,
-                Email = createBookingDto.Email,
-                PersonCount = createBookingDto.PersonCount,
-                Date = createBookingDto.Date
-            });
+            var bookingEntity = _mapper.Map<Booking>(createBookingDto);
+            _bookingService.TAdd(bookingEntity);
             return Ok("Rezervasyon Eklendi");
         }
 
@@ -57,15 +51,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            _bookingService.TUpdate(new Booking()
-            {
-                BookingID = updateBookingDto.BookingID,
-                Name = updateBookingDto.Name,
-                Phone = updateBookingDto.Phone,
-                Email = updateBookingDto.Email,
-                PersonCount = updateBookingDto.PersonCount,
-                Date = updateBookingDto.Date
-            });
+            var bookingEntity = _mapper.Map<Booking>(updateBookingDto);
+            _bookingService.TUpdate(bookingEntity);
             return Ok("Rezervasyon Güncellendi");
         }
     }
