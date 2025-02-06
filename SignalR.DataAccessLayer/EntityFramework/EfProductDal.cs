@@ -43,14 +43,20 @@ namespace SignalR.DataAccessLayer.EntityFramework
             return _context.Products.Average(x => x.Price);
         }
         
-        public decimal ProductMaxPrice()
+        public string ProductNameMaxPrice()
         {
-            return _context.Products.Max(x => x.Price);
+            return _context.Products
+                .OrderByDescending(x => x.Price)
+                .Select(x => x.Name)
+                .FirstOrDefault() ?? "No products available"; ;
         }
 
-        public decimal ProductMinPrice()
+        public string ProductNameMinPrice()
         {
-            return _context.Products.Min(x => x.Price);
+            return _context.Products
+                .OrderBy(x => x.Price)
+                .Select(x => x.Name)
+                .FirstOrDefault() ?? "No products available"; ;
         }
 
         public decimal ProductAveragePriceByCategoryNameHamburger()

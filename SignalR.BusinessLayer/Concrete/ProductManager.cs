@@ -62,14 +62,14 @@ namespace SignalR.BusinessLayer.Concrete
             return _productDal.ProductAveragePrice();
         }
 
-        public decimal TProductMaxPrice()
+        public string TProductNameMaxPrice()
         {
-            return _productDal.ProductMaxPrice();
+            return _productDal.ProductNameMaxPrice();
         }
 
-        public decimal TProductMinPrice()
+        public string TProductNameMinPrice()
         {
-            return _productDal.ProductMinPrice();
+            return _productDal.ProductNameMinPrice();
         }
 
         public decimal TProductAveragePriceByCategoryNameHamburger()
