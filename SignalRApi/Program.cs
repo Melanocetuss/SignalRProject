@@ -7,6 +7,20 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region CorsPolicy and SignalR
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+            .AllowAnyMethod()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
+#endregion
+
 #region Registirations
 builder.Services.AddDbContext<SignalRContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -53,6 +67,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy"); // CorsPolicy used here
 
 app.UseHttpsRedirection();
 
