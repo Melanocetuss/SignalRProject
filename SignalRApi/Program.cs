@@ -7,6 +7,7 @@ using SignalRApi.Hubs;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpClient();
 
 #region CorsPolicy and SignalR
 builder.Services.AddCors(opt =>

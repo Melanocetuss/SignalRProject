@@ -1,0 +1,108 @@
+﻿<!-- SignalR script -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(() => {
+
+		var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/signalrhub").build();
+
+		// Connection Status
+		$("#connstatus").text(connection.state);
+
+		// Start Connection
+		connection.start().then(() => {
+
+			// Connection Status
+			$("#connstatus").text(connection.state);
+			
+			setInterval(() => {
+				connection.invoke("SendStatistics");
+			}, 1000);
+
+		}).catch((err) => {console.log(err)});
+
+        // Category Count
+		connection.on("ReceiveCategoryCount", (CategoryCount) => {
+			$("#CategoryCount").text(CategoryCount);
+		});
+
+        // Active Category Count
+		connection.on("ReceiveActiveCategoryCount", (ActiveCategoryCount) => {
+			$("#ActiveCategoryCount").text(ActiveCategoryCount);
+		});
+
+        // Passive Category Count
+        connection.on("ReceivePassiveCategoryCount", (PassiveCategoryCount) => {
+            $("#PassiveCategoryCount").text(PassiveCategoryCount);
+		});
+
+		// Product Count
+		connection.on("ReceiveProductCount", (ProductCount) => {
+			$("#ProductCount").text(ProductCount);
+		});
+
+        // Product Count By Category Name Hamburger
+		connection.on("ReceiveProductCountByCategoryNameHamburger", (ProductCountByCategoryNameHamburger) => {
+			$("#ProductCountByCategoryNameHamburger").text(ProductCountByCategoryNameHamburger);
+		});
+
+        // Product Count By Category Name Drink
+		connection.on("ReceiveProductCountByCategoryNameDrink", (ProductCountByCategoryNameDrink) => {
+			$("#ProductCountByCategoryNameDrink").text(ProductCountByCategoryNameDrink);
+        });
+
+        // Product Average Price
+		connection.on("ReceiveProductAveragePrice", (ProductAveragePrice) => {
+			$("#ProductAveragePrice").text(ProductAveragePrice);
+		});
+
+        // Product Name Max Price
+		connection.on("ReceiveProductNameMaxPrice", (ProductNameMaxPrice) => {
+			$("#ProductNameMaxPrice").text(ProductNameMaxPrice);
+		});
+
+		// Product Name Min Price
+		connection.on("ReceiveProductNameMinPrice", (ProductNameMinPrice) => {
+			$("#ProductNameMinPrice").text(ProductNameMinPrice);
+		});
+
+        // Product Average Price By Category Name Hamburger
+		connection.on("ReceiveProductAveragePriceByCategoryNameHamburger", (ProductAveragePriceByCategoryNameHamburger) => {
+			$("#ProductAveragePriceByCategoryNameHamburger").text(ProductAveragePriceByCategoryNameHamburger);
+		});
+
+		// Total Order Count
+		connection.on("ReceiveTotalOrderCount", (TotalOrderCount) => {
+			$("#TotalOrderCount").text(TotalOrderCount);
+		});
+
+		// Active Order Count
+		connection.on("ReceiveActiveOrderCount", (ActiveOrderCount) => {
+			$("#ActiveOrderCount").text(ActiveOrderCount);
+        });
+
+		// Last Order Price
+		connection.on("ReceiveLastOrderPrice", (LastOrderPrice) => {
+			$("#LastOrderPrice").text(LastOrderPrice);
+        });
+
+		//! Money Case Total Amount  !
+		connection.on("ReceiveMoneyCaseTotalAmount", (MoneyCaseTotalAmount) => {
+			$("#MoneyCaseTotalAmount").text(MoneyCaseTotalAmount);
+        });
+
+        // Today Total Price
+		connection.on("ReceiveTodayTotalPrice", (TodayTotalPrice) => {
+			$("#TodayTotalPrice").text(TodayTotalPrice);
+		});
+
+		// Menu Table Count
+		connection.on("ReceiveMenuTableCount", (MenuTableCount) => {
+            $("#MenuTableCount").text(MenuTableCount);
+        });
+	});
+</script>
