@@ -55,7 +55,7 @@ namespace SignalRApi.Hubs
             #region Product Average Price
             var productAveragePriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Products/ProductAveragePrice");
             var productAveragePrice = await productAveragePriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveProductAveragePrice", productAveragePrice);
+            await Clients.All.SendAsync("ReceiveProductAveragePrice", productAveragePrice + " ₺");
             #endregion
 
             #region Product Name Max Price
@@ -73,7 +73,7 @@ namespace SignalRApi.Hubs
             #region Product Average Price By CategoryName Hamburger
             var productAveragePriceByCategoryNameHamburgerResponseMessage = await client.GetAsync("https://localhost:7274/api/Products/ProductAveragePriceByCategoryNameHamburger");
             var productAveragePriceByCategoryNameHamburger = await productAveragePriceByCategoryNameHamburgerResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveProductAveragePriceByCategoryNameHamburger", productAveragePriceByCategoryNameHamburger);
+            await Clients.All.SendAsync("ReceiveProductAveragePriceByCategoryNameHamburger", productAveragePriceByCategoryNameHamburger + " ₺");
             #endregion
 
             #region Total Order Count
@@ -91,7 +91,7 @@ namespace SignalRApi.Hubs
             #region Last Order Price
             var lastOrderPriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Orders/GetLastOrderPrice");
             var lastOrderPrice = await lastOrderPriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice);
+            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice + " ₺");
             #endregion
 
             #region Money Case Total Amount
@@ -106,14 +106,14 @@ namespace SignalRApi.Hubs
                 var totalAmount = moneyCases?.FirstOrDefault()?.TotalAmount ?? 0;
 
                 // Sadece totalAmount değerini gönder
-                await Clients.All.SendAsync("ReceiveMoneyCaseTotalAmount", totalAmount);
+                await Clients.All.SendAsync("ReceiveMoneyCaseTotalAmount", totalAmount.ToString("0,00") + " ₺");
             }
             #endregion
 
             #region Today Total Price
             var todayTotalPriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Orders/GetTodayTotalPrice");
             var todayTotalPrice = await todayTotalPriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice);
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice + " ₺");
             #endregion
 
             #region Menu Table Count
