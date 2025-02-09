@@ -4,12 +4,13 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+<!-- Script -->
 @await Component.InvokeAsync("_SignalRScriptsComponentPartial")
 
 <div class="content">
 	<div class="container-fluid">
-		<h4 class="page-title">Anlık İstatistik Sayfası</h4>		
-		
+		<h4 class="page-title">Anlık İstatistik Sayfası</h4>
+			
 		<!-- Row 1-->
 		<div class="row">			
 			<div class="col-md-3">
@@ -277,7 +278,7 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
+									<i class="la la-bank"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
@@ -330,5 +331,7 @@
 			</div>
 		</div>
 
+		<!-- Progress Bar -->
+		@await Component.InvokeAsync("_SignalRProgressBar")
     </div>
 </div>

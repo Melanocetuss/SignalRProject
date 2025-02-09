@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SignalR.EntityLayer.Entities;
+using System.Globalization;
 using System.Text.Json;
 
 namespace SignalRApi.Hubs
@@ -55,7 +56,18 @@ namespace SignalRApi.Hubs
             #region Product Average Price
             var productAveragePriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Products/ProductAveragePrice");
             var productAveragePrice = await productAveragePriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveProductAveragePrice", productAveragePrice + " ₺");
+
+            // String'i decimal'e çevir
+            if (decimal.TryParse(productAveragePrice, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price))
+            {
+                // 2 ondalık basamak ile formatla ve gönder
+                await Clients.All.SendAsync("ReceiveProductAveragePrice",
+                    price.ToString("N2", new CultureInfo("tr-TR")) + " ₺");
+            }
+            else
+            {
+                await Clients.All.SendAsync("ReceiveProductAveragePrice", "Geçersiz fiyat");
+            }
             #endregion
 
             #region Product Name Max Price
@@ -71,9 +83,23 @@ namespace SignalRApi.Hubs
             #endregion
 
             #region Product Average Price By CategoryName Hamburger
-            var productAveragePriceByCategoryNameHamburgerResponseMessage = await client.GetAsync("https://localhost:7274/api/Products/ProductAveragePriceByCategoryNameHamburger");
-            var productAveragePriceByCategoryNameHamburger = await productAveragePriceByCategoryNameHamburgerResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveProductAveragePriceByCategoryNameHamburger", productAveragePriceByCategoryNameHamburger + " ₺");
+            var productAveragePriceByCategoryNameHamburgerResponseMessage =
+                await client.GetAsync("https://localhost:7274/api/Products/ProductAveragePriceByCategoryNameHamburger");
+
+            var productAveragePriceByCategoryNameHamburger =
+                await productAveragePriceByCategoryNameHamburgerResponseMessage.Content.ReadAsStringAsync();
+
+            // String'i decimal'e çevir
+            if (decimal.TryParse(productAveragePriceByCategoryNameHamburger, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price2))
+            {
+                // 2 ondalık basamak ile formatla ve gönder
+                await Clients.All.SendAsync("ReceiveProductAveragePriceByCategoryNameHamburger",
+                    price.ToString("N2", new CultureInfo("tr-TR")) + " ₺");
+            }
+            else
+            {
+                await Clients.All.SendAsync("ReceiveProductAveragePriceByCategoryNameHamburger", "Geçersiz fiyat");
+            }
             #endregion
 
             #region Total Order Count
@@ -91,7 +117,7 @@ namespace SignalRApi.Hubs
             #region Last Order Price
             var lastOrderPriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Orders/GetLastOrderPrice");
             var lastOrderPrice = await lastOrderPriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice + " ₺");
+            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice);
             #endregion
 
             #region Money Case Total Amount
@@ -113,13 +139,42 @@ namespace SignalRApi.Hubs
             #region Today Total Price
             var todayTotalPriceResponseMessage = await client.GetAsync("https://localhost:7274/api/Orders/GetTodayTotalPrice");
             var todayTotalPrice = await todayTotalPriceResponseMessage.Content.ReadAsStringAsync();
-            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice + " ₺");
+
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice + " ₺");         
             #endregion
 
             #region Menu Table Count
             var menuTableCountResponseMessage = await client.GetAsync("https://localhost:7274/api/MenuTables/GetMenuTableByStatusFalseCount");
             var menuTableCount = await menuTableCountResponseMessage.Content.ReadAsStringAsync();
             await Clients.All.SendAsync("ReceiveMenuTableCount", menuTableCount);
+            #endregion
+
+            #region Proggress Bar Money Case
+            var proggressBarMoneyCaseTotalAmountResponseMessage = await client.GetAsync("https://localhost:7274/api/MoneyCases");
+
+            if (proggressBarMoneyCaseTotalAmountResponseMessage.IsSuccessStatusCode)
+            {
+                var proggressBarMoneyCaseJson = await proggressBarMoneyCaseTotalAmountResponseMessage.Content.ReadAsStringAsync();
+                var proggressBarMoneyCases = JsonSerializer.Deserialize<List<MoneyCase>>(proggressBarMoneyCaseJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                // Toplam miktarı al
+                var totalAmount = proggressBarMoneyCases?.FirstOrDefault()?.TotalAmount ?? 0;
+
+                // Sadece totalAmount değerini gönder
+                await Clients.All.SendAsync("ReceiveProggressBarMoneyCaseTotalAmount", totalAmount.ToString("0,00" + " ₺"));
+            }
+            #endregion           
+
+            #region Porggress Bar Active Order Count
+            var proggressBarActiveOrderCountResponseMessage = await client.GetAsync("https://localhost:7274/api/Orders/GetActiveOrderCount");
+            var proggressBarActiveOrderCount = await proggressBarActiveOrderCountResponseMessage.Content.ReadAsStringAsync();
+            await Clients.All.SendAsync("ReceiveProggressBarActiveOrderCount", proggressBarActiveOrderCount);
+            #endregion
+
+            #region Proggress Bar Menu Table Count
+            var proggressBarMenuTableCountResponseMessage = await client.GetAsync("https://localhost:7274/api/MenuTables/GetMenuTableByStatusFalseCount");
+            var proggressBarMenuTableCount = await proggressBarMenuTableCountResponseMessage.Content.ReadAsStringAsync();
+            await Clients.All.SendAsync("ReceiveProggressBarMenuTableCount", proggressBarMenuTableCount);
             #endregion
         }
     }
