@@ -1,7 +1,7 @@
 ﻿using SignalRWebUI.Dtos.CategoryDtos;
 using SignalRWebUI.Dtos.ProductDtos;
 
-namespace SignalRWebUI.Dtos.ViewModel
+namespace SignalRWebUI.Dtos.ViewModels
 {
     public class ProductCategoryViewModel
     {

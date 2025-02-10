@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.CategoryDtos;
 using SignalRWebUI.Dtos.ProductDtos;
-using SignalRWebUI.Dtos.ViewModel;
+using SignalRWebUI.Dtos.ViewModels;
 
 namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
