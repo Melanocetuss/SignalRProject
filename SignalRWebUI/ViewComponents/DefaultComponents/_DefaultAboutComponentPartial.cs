@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SignalRWebUI.ViewComponents.Default
+namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
-    public class _DefaultBookATableComponentPartial :ViewComponent
+    public class _DefaultAboutComponentPartial : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
