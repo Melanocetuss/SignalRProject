@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<!-- Slider -->
+@await Component.InvokeAsync("_DefaultSliderComponentPartial")
+
+<!-- Offer -->
+@await Component.InvokeAsync("_DefaultOfferComponentPartial")
+
+<!-- Our Menu -->
+@await Component.InvokeAsync("_DefaultOurMenuComponentPartial")
+
+<!-- About -->
+@await Component.InvokeAsync("_DefaultAboutComponentPartial")
+
+<!-- Book A Table -->
+@await Component.InvokeAsync("_DefaultBookATableComponentPartial")
+
+<!-- Testimonial -->
+@await Component.InvokeAsync("_DefaultTestimonialComponentPartial")
