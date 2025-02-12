@@ -18,20 +18,18 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
         {
             var client = _httpClientFactory.CreateClient();
 
-            // Ürünler için liste oluştur
+            // Kategoriler ve Ürünler için liste oluştur
+            var categories = new List<ResultCategoryDto>();
             var products = new List<ResultProductWithCategoriesDto>();
+            
             var productResponse = await client.GetAsync("https://localhost:7274/api/Products");
-
             if (productResponse.IsSuccessStatusCode)
             {
                 var productJsonData = await productResponse.Content.ReadAsStringAsync();
                 products = JsonConvert.DeserializeObject<List<ResultProductWithCategoriesDto>>(productJsonData);
             }
 
-            // Kategoriler için liste oluştur
-            var categories = new List<ResultCategoryDto>();
             var categoryResponse = await client.GetAsync("https://localhost:7274/api/Categories");
-
             if (categoryResponse.IsSuccessStatusCode)
             {
                 var categoryJsonData = await categoryResponse.Content.ReadAsStringAsync();

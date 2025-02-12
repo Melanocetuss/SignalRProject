@@ -65,6 +65,9 @@ builder.Services.AddScoped<IMoneyCaseDal, EfMoneyCaseDal>();
 
 builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
 builder.Services.AddScoped<IMenuTableDal, EfMenuTableDal>();
+
+builder.Services.AddScoped<IBasketService, BasketManager>();
+builder.Services.AddScoped<IBasketDal, EfBasketDal>();
 #endregion
 
 // Add services to the container.
