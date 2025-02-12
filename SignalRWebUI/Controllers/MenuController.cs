@@ -6,6 +6,8 @@ namespace SignalRWebUI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.SubPage = "sub_page";
+            ViewBag.NavbarDiv = "</div>";
             return View();
         }
     }

@@ -9,10 +9,11 @@
     <!-- Head -->
     @await Component.InvokeAsync("_UILayoutHeaderComponentPartail")
 
-<body>
+<body class="@ViewBag.SubPage">
 
     <!-- Navbar -->
     @await Component.InvokeAsync("_UILayoutNavbarComponentPartial")
+    @Html.Raw(ViewBag.NavbarDiv)
 
     @RenderBody()
 
