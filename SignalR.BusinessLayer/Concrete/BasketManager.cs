@@ -17,17 +17,18 @@ namespace SignalR.BusinessLayer.Concrete
             return _basketDal.GetBasketByMenuTableNumber(id);
         }
         
-        // suanlik bunlar kullanilmiyor
+        
         public void TAdd(Basket entity)
         {
-            throw new NotImplementedException();
+            _basketDal.Add(entity);
         }
 
         public void TDelete(Basket entity)
         {
-            throw new NotImplementedException();
+            _basketDal.Delete(entity);
         }
 
+        // suanlik bunlar kullanilmiyor
         public Basket TGetByID(int id)
         {
             throw new NotImplementedException();

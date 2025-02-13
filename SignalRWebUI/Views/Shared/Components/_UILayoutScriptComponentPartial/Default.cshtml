@@ -31,11 +31,12 @@
         
         var id = value;
         $.ajax({
-            type: 'post',
-            data: {product:id},
+            type: 'POST',
+            data: { ProductID : id },
+            url: "/Menu/AddBasket/" + id,          
             contentType: 'json',
             success: function(){
-                swal("Seçilen Ürün ID: " + id, "Seçiminizi Yaptınız", "success");
+                swal("Ürün Sepete Eklendi", "Seçiminizi Yaptınız", "success");
             }
         });
     }

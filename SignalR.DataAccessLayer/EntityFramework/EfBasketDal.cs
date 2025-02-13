@@ -23,6 +23,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
                 .Select(x => new ResultBasketDto
                 {
                     BasketID = x.BasketID,
+                    ProductID = x.ProductID,
                     ProductName = x.Product.Name,
                     ProductImageUrl = x.Product.ImageUrl,
                     Count = x.Count,
