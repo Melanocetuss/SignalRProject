@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Sepetiniz";
     Layout = "~/Views/UILayout/Index.cshtml";
-    int count = 0;
 }
 
 <div class="container py-5">
@@ -21,44 +20,53 @@
                     <h4>Sepetiniz</h4>
                 </div>
                 <div class="card-body p-4">
-                    <table class="table table-hover text-center">
-                        <thead class="bg-dark text-white">
-                            <tr>
-                                <th>#</th>
-                                <th>Ürün</th>
-                                <th>Ürün Adı</th>
-                                <th>Adet</th>
-                                <th>Fiyat</th>
-                                <th>Toplam</th>
-                                <th>İptal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                count++;
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <thead class="bg-dark text-white">
                                 <tr>
-                                    <td>@count</td>
-                                    <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="65" height="65" /></td>
-                                    <td>@item.ProductName</td>
-                                    <td>@item.Count</td>
-                                    <td>@item.Price TL</td>
-                                    <td>@item.TotalPrice TL</td>
-                                    <td>
-                                        <button data-basketid="@item.BasketID" class="btn btn-sm btn-danger btn-delete">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
+                                    <th>Ürün</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Adet</th>
+                                    <th>Fiyat</th>
+                                    <th>Toplam</th>
+                                    <th>İptal</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="65" height="65" /></td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Count</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.TotalPrice TL</td>
+                                        <td class="text-center">
+                                            <button data-basketid="@item.BasketID" class="btn btn-sm btn-danger btn-delete" style="min-width: 36px;">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Order Summary -->
+        <!-- Sidebar -->
         <div class="col-lg-3">
+            <!-- Coupon Code -->
+            <div class="p-3 shadow-sm bg-light rounded mb-4">
+                <h6 class="text-center text-dark">Kupon Kodu</h6>
+                <div class="input-group">
+                    <input type="text" id="couponcode" class="form-control" placeholder="Kupon Kodunuz">
+                    <div class="input-group-append">
+                        <button class="btn btn-warning" id="btncouponcode">Uygula</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Order Summary -->
             <div class="card shadow-sm p-3">
                 <h5 class="section-title text-center bg-warning text-white p-2 rounded">Sepet Özeti</h5>
                 <div class="p-3">
@@ -76,17 +84,6 @@
                     </div>
                 </div>
                 <button id="btnchecked" class="btn btn-warning btn-block font-weight-bold">Siparişi Tamamla</button>
-            </div>
-
-            <!-- Coupon Code -->
-            <div class="mt-4 p-3 shadow-sm bg-light rounded">
-                <h6 class="text-center text-dark">Kupon Kodu</h6>
-                <div class="input-group">
-                    <input type="text" id="couponcode" class="form-control" placeholder="Kupon Kodunuz">
-                    <div class="input-group-append">
-                        <button class="btn btn-warning" id="btncouponcode">Uygula</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
