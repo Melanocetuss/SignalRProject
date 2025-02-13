@@ -35,7 +35,7 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            return Json(createBasketDto);
+            return NoContent();
         }
     }
 }

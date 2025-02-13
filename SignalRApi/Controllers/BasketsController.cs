@@ -23,7 +23,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetBasketBtMenuTableID(int id) 
+        public IActionResult GetBasketByMenuTableID(int id) 
         {
             var values = _basketService.TGetBasketByMenuTableNumber(id);
             return Ok(values);
@@ -69,6 +69,42 @@ namespace SignalRApi.Controllers
 
             _context.SaveChanges();
             return Ok("Sepete Eklendi");
+        }
+
+        [HttpDelete]
+        public IActionResult RemoveBasket(int id)
+        {
+            var value = _basketService.TGetByID(id);
+            _basketService.TDelete(value);
+            return Ok("Sepeten Kaldırıldı");
+        }
+
+        [HttpPut("increase/{id}")]
+        public IActionResult IncreaseProductCount(int id)
+        {
+            try
+            {
+                _basketService.TIncreaseProductCount(id);
+                return Ok("Ürün miktarı artırıldı");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        [HttpPut("decrease/{id}")]
+        public IActionResult DecreaseProductCount(int id)
+        {
+            try
+            {
+                _basketService.TDecreaseProductCount(id);
+                return Ok("Ürün miktarı azaltıldı");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Bir hata oluştu: {ex.Message}");
+            }
         }
     }
 }

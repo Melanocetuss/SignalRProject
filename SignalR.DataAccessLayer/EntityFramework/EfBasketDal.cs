@@ -34,5 +34,36 @@ namespace SignalR.DataAccessLayer.EntityFramework
                 .ToList();
             return values;
         }
+
+        public void IncreaseProductCount(int id)
+        {
+            var basketItem = _context.Baskets.FirstOrDefault(x => x.BasketID == id);
+            
+            if (basketItem != null)
+            {              
+                basketItem.Count += 1;
+                basketItem.TotalPrice = basketItem.Count * basketItem.Price;
+                _context.Baskets.Update(basketItem);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DecreaseProductCount(int id)
+        {
+            var basketItem = _context.Baskets.FirstOrDefault(x => x.BasketID == id);
+            
+            if (basketItem != null && basketItem.Count > 1)
+            {
+                basketItem.Count -= 1;
+                basketItem.TotalPrice = basketItem.Count * basketItem.Price;
+                _context.Baskets.Update(basketItem);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.Baskets.Remove(basketItem);
+                _context.SaveChanges();
+            }
+        }
     }
 }

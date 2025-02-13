@@ -16,11 +16,10 @@ namespace SignalR.BusinessLayer.Concrete
         {
             return _basketDal.GetBasketByMenuTableNumber(id);
         }
-        
-        
-        public void TAdd(Basket entity)
+
+        public Basket TGetByID(int id)
         {
-            _basketDal.Add(entity);
+            return _basketDal.GetByID(id);
         }
 
         public void TDelete(Basket entity)
@@ -28,12 +27,22 @@ namespace SignalR.BusinessLayer.Concrete
             _basketDal.Delete(entity);
         }
 
+        public void TIncreaseProductCount(int id)
+        {
+            _basketDal.IncreaseProductCount(id);
+        }
+
+        public void TDecreaseProductCount(int id)
+        {
+            _basketDal.DecreaseProductCount(id);
+        }
+
         // suanlik bunlar kullanilmiyor
-        public Basket TGetByID(int id)
+        public void TAdd(Basket entity)
         {
             throw new NotImplementedException();
         }
-
+            
         public List<Basket> TGetListAll()
         {
             throw new NotImplementedException();

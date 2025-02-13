@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Sepetiniz";
     Layout = "~/Views/UILayout/Index.cshtml";
+    decimal basketTotalPrice = Model.Sum(x => x.TotalPrice);
+    decimal kdv = basketTotalPrice * 0.10m;
+    decimal totalWithKdv = basketTotalPrice + kdv;
 }
 
 <div class="container py-5">
@@ -34,17 +37,23 @@
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
-                                {
+                                {                                    
                                     <tr>
                                         <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="65" height="65" /></td>
                                         <td>@item.ProductName</td>
-                                        <td>@item.Count</td>
+                                        <td>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a href="/Basket/DecreaseProductCount/@item.BasketID" class="btn btn-sm btn-outline-danger" style="min-width: 36px;">-</a>
+                                                <span class="mx-2">@item.Count</span>
+                                                <a href="/Basket/IncreaseProductCount/@item.BasketID" class="btn btn-sm btn-outline-warning" style="min-width: 36px;">+</a>
+                                            </div>
+                                        </td>
                                         <td>@item.Price</td>
                                         <td>@item.TotalPrice TL</td>
                                         <td class="text-center">
-                                            <button data-basketid="@item.BasketID" class="btn btn-sm btn-danger btn-delete" style="min-width: 36px;">
+                                            <a href="/Basket/RemoveBasket/@item.BasketID" class="btn btn-sm btn-danger btn-delete" style="min-width: 36px;">
                                                 <i class="fa fa-times"></i>
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 }
@@ -72,15 +81,15 @@
                 <div class="p-3">
                     <div class="d-flex justify-content-between mb-3">
                         <h6>Toplam Tutar</h6>
-                        <h6><span id="totalprice">51</span> TL</h6>
+                        <h6><span id="totalprice">@basketTotalPrice.ToString("F2")</span> TL</h6>
                     </div>
                     <div class="d-flex justify-content-between border-bottom pb-2">
-                        <h6>KDV Oranı</h6>
-                        <h6><span id="kdv">8</span> TL</h6>
+                        <h6>KDV Tutarı</h6>
+                        <h6><span id="kdv">@kdv.ToString("F2")</span> TL</h6>
                     </div>
                     <div class="d-flex justify-content-between mt-3">
                         <h5>Toplam</h5>
-                        <h5><span id="totalpricewithkdv">59</span> TL</h5>
+                        <h5><span id="totalpricewithkdv">@totalWithKdv.ToString("F2")</span> TL</h5>
                     </div>
                 </div>
                 <button id="btnchecked" class="btn btn-warning btn-block font-weight-bold">Siparişi Tamamla</button>

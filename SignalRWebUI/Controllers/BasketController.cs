@@ -31,5 +31,44 @@ namespace SignalRWebUI.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> RemoveBasket(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7274/api/Baskets?id={id}");
+            
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return NoContent();
+        }
+
+        public async Task<IActionResult> IncreaseProductCount(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.PutAsync($"https://localhost:7274/api/Baskets/increase/{id}",null);
+
+            if (responseMessage.IsSuccessStatusCode) 
+            {
+                return RedirectToAction("Index");
+            }
+
+            return NoContent();
+        }
+
+        public async Task<IActionResult> DecreaseProductCount(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.PutAsync($"https://localhost:7274/api/Baskets/decrease/{id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return NoContent();
+        }
     }
 }
