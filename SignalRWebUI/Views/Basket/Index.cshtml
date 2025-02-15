@@ -16,17 +16,17 @@
     </nav>
 
     <div class="row">
-        <!-- Basket Table -->
-        <div class="col-lg-9 mb-4">
-            <div class="card shadow-sm">
+        <!-- Basket Table (Sepet) -->
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow-lg">
                 <div class="card-header bg-secondary text-white text-center">
-                    <h4>Sepetiniz</h4>
+                    <h3>Sepetiniz</h3>
                 </div>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         <table class="table table-hover text-center">
                             <thead class="bg-dark text-white">
-                                <tr>
+                                <tr style="font-size: 1.2rem;">
                                     <th>Ürün</th>
                                     <th>Ürün Adı</th>
                                     <th>Adet</th>
@@ -37,21 +37,21 @@
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
-                                {                                    
-                                    <tr>
-                                        <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="65" height="65" /></td>
+                                {
+                                    <tr style="font-size: 1.1rem;">
+                                        <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="90" height="90" /></td> <!-- Daha büyük resim -->
                                         <td>@item.ProductName</td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <a href="/Basket/DecreaseProductCount/@item.BasketID" class="btn btn-sm btn-outline-danger" style="min-width: 36px;">-</a>
-                                                <span class="mx-2">@item.Count</span>
-                                                <a href="/Basket/IncreaseProductCount/@item.BasketID" class="btn btn-sm btn-outline-warning" style="min-width: 36px;">+</a>
+                                                <a href="/Basket/DecreaseProductCount/@item.BasketID" class="btn btn-lg btn-outline-danger mx-2">-</a>
+                                                <span class="mx-3 font-weight-bold">@item.Count</span>
+                                                <a href="/Basket/IncreaseProductCount/@item.BasketID" class="btn btn-lg btn-outline-warning mx-2">+</a>
                                             </div>
                                         </td>
-                                        <td>@item.Price</td>
+                                        <td>@item.Price TL</td>
                                         <td>@item.TotalPrice TL</td>
                                         <td class="text-center">
-                                            <a href="/Basket/RemoveBasket/@item.BasketID" class="btn btn-sm btn-danger btn-delete" style="min-width: 36px;">
+                                            <a href="/Basket/RemoveBasket/@item.BasketID" class="btn btn-lg btn-danger btn-delete">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>
@@ -63,36 +63,36 @@
                 </div>
             </div>
         </div>
-        <!-- Sidebar -->
-        <div class="col-lg-3">
-            <!-- Coupon Code -->
-            <div class="p-3 shadow-sm bg-light rounded mb-4">
-                <h6 class="text-center text-dark">Kupon Kodu</h6>
+
+        <!-- Order Summary (Hesap Özeti) -->
+        <div class="col-lg-4">
+            <div class="p-4 shadow-lg bg-light rounded mb-4">
+                <h4 class="text-center text-dark">Kupon Kodu</h4>
                 <div class="input-group">
-                    <input type="text" id="couponcode" class="form-control" placeholder="Kupon Kodunuz">
+                    <input type="text" id="couponcode" class="form-control form-control-lg" placeholder="Kupon Kodunuz">
                     <div class="input-group-append">
-                        <button class="btn btn-warning" id="btncouponcode">Uygula</button>
+                        <button class="btn btn-warning btn-lg" id="btncouponcode">Uygula</button>
                     </div>
                 </div>
             </div>
-            <!-- Order Summary -->
-            <div class="card shadow-sm p-3">
-                <h5 class="section-title text-center bg-warning text-white p-2 rounded">Sepet Özeti</h5>
-                <div class="p-3">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h6>Toplam Tutar</h6>
-                        <h6><span id="totalprice">@basketTotalPrice.ToString("F2")</span> TL</h6>
+
+            <div class="card shadow-lg p-4">
+                <h4 class="section-title text-center bg-warning text-white p-3 rounded">Sepet Özeti</h4>
+                <div class="p-4">
+                    <div class="d-flex justify-content-between mb-3" style="font-size: 1.2rem;">
+                        <h5>Toplam Tutar</h5>
+                        <h5><span id="totalprice">@basketTotalPrice.ToString("F2")</span> TL</h5>
                     </div>
-                    <div class="d-flex justify-content-between border-bottom pb-2">
-                        <h6>KDV Tutarı</h6>
-                        <h6><span id="kdv">@kdv.ToString("F2")</span> TL</h6>
+                    <div class="d-flex justify-content-between border-bottom pb-3" style="font-size: 1.2rem;">
+                        <h5>KDV Tutarı</h5>
+                        <h5><span id="kdv">@kdv.ToString("F2")</span> TL</h5>
                     </div>
-                    <div class="d-flex justify-content-between mt-3">
-                        <h5>Toplam</h5>
-                        <h5><span id="totalpricewithkdv">@totalWithKdv.ToString("F2")</span> TL</h5>
+                    <div class="d-flex justify-content-between mt-3" style="font-size: 1.4rem;">
+                        <h4>Toplam</h4>
+                        <h4><span id="totalpricewithkdv">@totalWithKdv.ToString("F2")</span> TL</h4>
                     </div>
                 </div>
-                <button id="btnchecked" class="btn btn-warning btn-block font-weight-bold">Siparişi Tamamla</button>
+                <button id="btnchecked" class="btn btn-warning btn-lg btn-block font-weight-bold">Siparişi Tamamla</button>
             </div>
         </div>
     </div>
