@@ -177,5 +177,16 @@ namespace SignalRApi.Hubs
             await Clients.All.SendAsync("ReceiveProggressBarMenuTableCount", proggressBarMenuTableCount);
             #endregion
         }
+
+        public async Task SendBookingList()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7274/api/Bookings");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                await Clients.All.SendAsync("ReceiveBookingList", jsonData);
+            }
+        }
     }
 }
