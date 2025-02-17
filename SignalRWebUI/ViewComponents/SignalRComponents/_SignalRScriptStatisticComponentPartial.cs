@@ -2,7 +2,7 @@
 
 namespace SignalRWebUI.ViewComponents.SignalRComponents
 {
-    public class _SignalRScriptsComponentPartial : ViewComponent
+    public class _SignalRScriptStatisticComponentPartial : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

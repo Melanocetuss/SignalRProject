@@ -1,0 +1,32 @@
+﻿<!-- SignalR script -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(() => {
+
+		var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/signalrhub").build();
+
+		// Connection Status
+		$("#connstatus").text(connection.state);
+
+		// Start Connection
+		connection.start().then(() => {
+
+			// Connection Status
+			$("#connstatus").text(connection.state);
+
+			setInterval(() => {
+				connection.invoke("SendNotification");
+			}, 100);
+
+		}).catch((err) => {console.log(err)});
+
+		connection.on("ReceiveNotificationCountByStatusFalse", (NotificationCountByStatusFalse) => {
+			$("#NotificationCountByStatusFalse").text(NotificationCountByStatusFalse);
+		});
+	});
+</script>

@@ -1,4 +1,6 @@
-﻿<div class="main-header">
+﻿@await Component.InvokeAsync("_SignalRScriptNotificationComponentPartial")
+
+<div class="main-header">
 	<div class="logo-header">
 		<a href="index.html" class="logo">
 			SignalR Admin
@@ -36,7 +38,7 @@
 				<li class="nav-item dropdown hidden-caret">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="la la-bell"></i>
-						<span class="notification">3</span>
+						<span class="notification" id="NotificationCountByStatusFalse"></span>
 					</a>
 					<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
 						<li>

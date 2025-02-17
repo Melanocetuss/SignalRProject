@@ -181,12 +181,26 @@ namespace SignalRApi.Hubs
         public async Task SendBookingList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7274/api/Bookings");
+            var responseMessage = await client.GetAsync("https://localhost:7274/api/Bookings");           
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 await Clients.All.SendAsync("ReceiveBookingList", jsonData);
             }
+        }
+
+        public async Task SendNotification()
+        {
+            var client = _httpClientFactory.CreateClient();
+            
+            var responseMessage = await client.GetAsync("https://localhost:7274/api/Notifications/NotificationCountByStatusFalse");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var notificationCount = int.Parse(jsonData);
+                await Clients.All.SendAsync("ReceiveNotificationCountByStatusFalse", notificationCount);
+            }
+
         }
     }
 }
