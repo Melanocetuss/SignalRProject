@@ -41,5 +41,10 @@ namespace SignalR.BusinessLayer.Concrete
         {
             return _notificationDal.NotificationCountByStatusFalse();
         }
+
+        public List<Notification> TGetAllNotificationsByStatusFalse()
+        {
+            return _notificationDal.GetAllNotificationsByStatusFalse();
+        }
     }
 }

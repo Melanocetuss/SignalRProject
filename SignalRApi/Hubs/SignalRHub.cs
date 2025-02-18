@@ -192,15 +192,25 @@ namespace SignalRApi.Hubs
         public async Task SendNotification()
         {
             var client = _httpClientFactory.CreateClient();
-            
-            var responseMessage = await client.GetAsync("https://localhost:7274/api/Notifications/NotificationCountByStatusFalse");
-            if (responseMessage.IsSuccessStatusCode)
+
+            #region NotificationCountByStatusFalse
+            var NotificationCountResponseMessage = await client.GetAsync("https://localhost:7274/api/Notifications/NotificationCountByStatusFalse");
+            if (NotificationCountResponseMessage.IsSuccessStatusCode)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var notificationCount = int.Parse(jsonData);
+                var NotificationCountJsonData = await NotificationCountResponseMessage.Content.ReadAsStringAsync();
+                var notificationCount = int.Parse(NotificationCountJsonData);
                 await Clients.All.SendAsync("ReceiveNotificationCountByStatusFalse", notificationCount);
             }
+            #endregion
 
+            #region NotificationListByStatusFalse
+            var NotificationListByStatusFalseResponseMessage = await client.GetAsync("https://localhost:7274/api/Notifications/GetAllNotificationsByStatusFalse");
+            if (NotificationListByStatusFalseResponseMessage.IsSuccessStatusCode)
+            {
+                var NotificationListByStatusFalseJsonData = await NotificationListByStatusFalseResponseMessage.Content.ReadAsStringAsync();
+                await Clients.All.SendAsync("ReceiveNotificationListByStatusFalse", NotificationListByStatusFalseJsonData);
+            }
+            #endregion
         }
     }
 }

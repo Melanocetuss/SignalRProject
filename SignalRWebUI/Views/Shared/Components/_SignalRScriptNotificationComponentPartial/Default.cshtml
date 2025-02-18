@@ -5,28 +5,64 @@
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 
 <script type="text/javascript">
+        $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/signalrhub").build();
 
-	$(document).ready(() => {
+        // Bildirim sesi tanımla
+        var notificationSound = new Audio('/Ready-Bootstrap-Dashboard-master/assets/sound/Notification.mp3');
+        var previousNotificationCount = 0; // Önceki bildirim sayısını sakla
 
-		var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/signalrhub").build();
+        // Kullanıcı bir kere sayfaya tıkladığında sesin çalışmasını aktif et
+        document.addEventListener("click", function() {
+            notificationSound.play().catch(error => console.log("Ses çalma hatası:", error));
+        }, { once: true }); // Sadece bir kez çalışsın
 
-		// Connection Status
-		$("#connstatus").text(connection.state);
+        // Connection Status
+        $("#connstatus").text(connection.state);
 
-		// Start Connection
-		connection.start().then(() => {
+        // Start Connection
+        connection.start().then(() => {
+            $("#connstatus").text(connection.state);
 
-			// Connection Status
-			$("#connstatus").text(connection.state);
+            setInterval(() => {
+                connection.invoke("SendNotification");
+            }, 3000);
 
-			setInterval(() => {
-				connection.invoke("SendNotification");
-			}, 100);
+        }).catch((err) => {console.log(err)});
 
-		}).catch((err) => {console.log(err)});
+        // NotificationCountByStatusFalse
+        connection.on("ReceiveNotificationCountByStatusFalse", (NotificationCountByStatusFalse) => {
+            // Eğer yeni bildirim sayısı önceki değerden büyükse sesi çal
+            if (NotificationCountByStatusFalse > previousNotificationCount) {
+                try {
+                    notificationSound.play().catch(error => console.log("Ses çalma hatası:", error));
+                } catch (error) {
+                    console.log("Ses oynatırken hata oluştu:", error);
+                }
+            }
+            // Yeni değeri sakla
+            previousNotificationCount = NotificationCountByStatusFalse;
 
-		connection.on("ReceiveNotificationCountByStatusFalse", (NotificationCountByStatusFalse) => {
-			$("#NotificationCountByStatusFalse").text(NotificationCountByStatusFalse);
-		});
-	});
+            // Bildirim sayısını güncelle
+            $("#NotificationCountByStatusFalse").text(NotificationCountByStatusFalse);
+        });
+
+        // NotificationListByStatusFalse
+        connection.on("ReceiveNotificationListByStatusFalse", (jsonData) => {
+            const NotificationList = JSON.parse(jsonData);
+            $("#notilist").empty();
+            for(var i = 0; i<NotificationList.length; i++){
+                $("#notilist").append(
+                    `<a href="#">
+                        <div class="${NotificationList[i].type}"> <i class="${NotificationList[i].icon}"></i> </div>
+                        <div class="notif-content">
+                            <span class="block">
+                                ${NotificationList[i].description}
+                            </span>
+                            <span class="time">${NotificationList[i].date}</span>
+                        </div>
+                     </a>`);
+            }
+        });
+    });
 </script>
