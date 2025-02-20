@@ -68,5 +68,35 @@ namespace SignalRApi.Controllers
         {
             return Ok(_notificationService.TGetAllNotificationsByStatusFalse());
         }
+
+        [HttpPut("NotificationStatusChangeToTrue")]
+        public IActionResult NotificationStatusChangeToTrue(int id)
+        {
+            try
+            {
+                _notificationService.TNotificationStatusChangeToTrue(id);
+                return Ok("Okundu Olarak İşaretlendi");
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest($"Bir hata oluştu: {ex.Message}");
+            }
+        }
+
+        [HttpPut("NotificationStatusChangeToFalse")]
+        public IActionResult NotificationStatusChangeToFalse(int id)
+        {
+            try
+            {
+                _notificationService.TNotificationStatusChangeToFalse(id);
+                return Ok("Okunmadı Olarak İşaretlendi");
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest($"Bir hata oluştu: {ex.Message}");
+            }
+        }
     }
 }

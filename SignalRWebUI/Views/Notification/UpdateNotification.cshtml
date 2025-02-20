@@ -1,0 +1,63 @@
+﻿@model UpdateNotificationDto
+@{
+    ViewData["Title"] = "UpdateNotification";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Bildirim İşelemleri</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<form method="post">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Bildirim Güncelle</div>
+						</div>
+						<div class="card-body">
+
+							<input type="hidden" readonly asp-for="NotificationID" />
+							<div class="form-group">
+								<label for="type">Bildirim Türü Seçiniz</label>
+								<select class="form-control" id="type" asp-for="Type">
+									<option value="" disabled selected hidden>Bildirim Türü Seçiniz</option>
+									<option value="notif-icon notif-primary">Yeni Rezervasyon Geldi.</option>
+									<option value="notif-icon notif-success">Yeni Yorumunuz Var.</option>
+									<option value="notif-icon notif-danger">Yeni Siparişiniz Var.</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="icon">Bildirim İkonu Seçiniz</label>
+								<select class="form-control" id="icon" asp-for="Icon">
+									<option value="" disabled selected hidden>İkon Seçiniz</option>
+									<option value="la la-user-plus">Yeni Rezervasyon Geldi.</option>
+									<option value="la la-comment">Yeni Yorumunuz Var.</option>
+									<option value="la la-heart">Yeni Siparişiniz Var.</option>
+
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="categoryname">Bildirim Açıklaması Giriniz</label>
+								<input type="text" class="form-control" id="categoryname" asp-for="Description">
+							</div>
+
+							<div class="form-group">
+								<label for="categoryname">Bildirim Tarihi Giriniz</label>
+								<input type="text" class="form-control" id="categoryname" asp-for="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+							</div>
+
+							<input type="hidden" class="form-control" id="categoryname" asp-for="Status" value="false" readonly>
+
+							<div class="card-action">
+								<button class="btn btn-primary">Bildirim Güncelle</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
