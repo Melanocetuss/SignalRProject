@@ -1,0 +1,15 @@
+﻿@model List<ResultMenuTableDto>
+@{
+	ViewData["Title"] = "TableListByStatus";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<!-- SignalR-->
+@await Component.InvokeAsync("_SignalRScriptMenuTableComponentPartial")
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Anlık Masa Durumları</h4>
+		<div id="menuTableList"></div>			
+	</div>
+</div>

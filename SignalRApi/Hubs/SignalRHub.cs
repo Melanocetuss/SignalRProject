@@ -212,5 +212,17 @@ namespace SignalRApi.Hubs
             }
             #endregion
         }
+
+        public async Task SendMenuTable()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7274/api/MenuTables");
+
+            if (responseMessage.IsSuccessStatusCode) 
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                await Clients.All.SendAsync("ReceiveMenuTableList", jsonData);
+            }
+        }
     }
 }

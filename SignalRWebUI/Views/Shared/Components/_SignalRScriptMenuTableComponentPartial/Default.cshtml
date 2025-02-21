@@ -1,0 +1,48 @@
+﻿<!-- SignalR script -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/signalrhub").build();
+        $("#connstatus").text(connection.state);
+
+        connection.start().then(() => {
+            $("#connstatus").text(connection.state);
+
+            setInterval(() => {
+                connection.invoke("SendMenuTable");
+            }, 100);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
+        connection.on("ReceiveMenuTableList", (jsonData) => {
+
+            // JSON verisini JavaScript objesine çeviriyoruz
+            const MenuTableList = JSON.parse(jsonData);
+
+            let tablehtml = `<div class="row">`;
+            $.each(MenuTableList, (index, item) => {
+
+                let color = item.status ? "card card-stats card-danger" : "card card-stats card-success";
+                let status = item.status ? "Masa Dolu" : "Masa Boş";
+
+                tablehtml +=
+                `<div class="col-md-3">
+                    <div class="${color} text-white shadow-lg rounded-3">
+                        <div class="card-body text-center">
+                            <h1 class="card-title">${item.name}</h1>
+                            <span>${status}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            tablehtml += "</div>";
+            $("#menuTableList").html(tablehtml);
+        });
+    });
+</script>
