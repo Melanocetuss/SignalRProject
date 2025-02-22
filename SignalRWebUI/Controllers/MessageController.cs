@@ -10,5 +10,12 @@ namespace SignalRWebUI.Controllers
             ViewBag.NavbarDiv = "</div>";
             return View();
         }
+
+        public IActionResult ClientUserCount()
+        {
+            ViewBag.SubPage = "sub_page";
+            ViewBag.NavbarDiv = "</div>";
+            return View();
+        }
     }
 }

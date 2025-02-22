@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "ClientUserCount";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<!-- SignalR Script -->
+@await Component.InvokeAsync("_SignalRScriptClientUserCountComponentPartial")
+
+
+<section class="food_section layout_padding">
+    <div class="container">
+        <h4 class="page-title">Anlık Client Sayısı: <strong id="clientCountValue"></strong></h4>
+    </div>
+</section>
