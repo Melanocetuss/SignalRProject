@@ -1,7 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.EntityLayer.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region Autorization Policy
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+#endregion
 
 #region Identity Configurations
 builder.Services.AddDbContext<SignalRContext>();
@@ -9,7 +15,19 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Signal
 #endregion
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+#region Autorization
+builder.Services.AddControllersWithViews(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+});
+
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.LoginPath = "/Login/Index/";
+});
+#endregion
+
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
@@ -26,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); // Authentication
 app.UseAuthorization();
 
 app.MapControllerRoute(

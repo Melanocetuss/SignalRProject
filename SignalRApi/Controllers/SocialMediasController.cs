@@ -56,5 +56,19 @@ namespace SignalRApi.Controllers
             _socialMediaService.TUpdate(socialMediaEntity);
             return Ok("Sosyal Medya Güncellendi");
         }
+
+        [HttpPut("ChangeStatusToTrue")]
+        public IActionResult ChangeStatusToTrue(int id)
+        {
+            _socialMediaService.TChangeStatusToTrue(id);
+            return Ok("Sosyal Medya Durumu Aktif Edildi");
+        }
+
+        [HttpPut("ChangeStatusToFalse")]
+        public IActionResult ChangeStatusToFalse(int id)
+        {
+            _socialMediaService.TChangeStatusToFalse(id);
+            return Ok("Sosyal Medya Durumu Pasif Edildi");
+        }
     }
 }

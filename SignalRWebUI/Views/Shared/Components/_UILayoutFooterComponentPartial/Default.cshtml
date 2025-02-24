@@ -40,23 +40,10 @@
                         <p>
                             @item.Description
                         </p>
-                        <div class="footer_social">
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
-                        </div>
+                        
+                        <!-- Social Medias -->
+                        @await Component.InvokeAsync("_UILayoutFooterSocialMediaComponentPartial")
+
                     </div>
                 </div>
                 <div class="col-md-4 footer-col">

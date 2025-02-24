@@ -36,5 +36,15 @@ namespace SignalR.BusinessLayer.Concrete
         {
             _socialMediaDal.Update(entity);
         }
+
+        public void TChangeStatusToFalse(int id)
+        {
+            _socialMediaDal.ChangeStatusToFalse(id);
+        }
+
+        public void TChangeStatusToTrue(int id)
+        {
+            _socialMediaDal.ChangeStatusToTrue(id);
+        }
     }
 }
