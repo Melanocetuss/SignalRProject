@@ -23,7 +23,7 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Kategori Adı</th>
-									<th scope="col">Durumu</th>
+									<th scope="col">Menüdeki Durumu</th>
 									<th scope="col">Sil</th>
 									<th scope="col">Güncelle</th>
 								</tr>
@@ -34,11 +34,20 @@
                             {
 								count++;
 								<tr>
-									<td>@count</td>
+									<th>@count</th>
 									<td>@item.Name</td>
-									<td>@item.Status</td>
-										<td><a href="/Category/RemoveCategory/@item.CategoryID" class="btn btn-outline-danger btn-rounded">Sil</a></td>
-										<td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+									<td>
+										@if(item.Status)
+										{
+											<span class="badge badge-success">Menüde Gözüküyor</span>
+										}
+										else
+										{
+											<span class="badge badge-danger">Menüde Gözükmüyor</span>
+										}
+									</td>
+									<td><a href="/Category/RemoveCategory/@item.CategoryID" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+									<td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
 								</tr>						
                             }
 							

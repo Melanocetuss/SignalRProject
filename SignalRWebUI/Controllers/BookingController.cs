@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Dtos.BookingDtos;
+using System.Net.Http;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
@@ -89,6 +90,32 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+        
+        public async Task<IActionResult> BookingStatusApproved(int id)
+        {
+            var client = _clientFactory.CreateClient();
+            var responseMessage = await client.PutAsync($"https://localhost:7274/api/Bookings/BookingStatusApproved?id={id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return NoContent();
+        }
+        
+        public async Task<IActionResult> BookingStatusCancelled(int id)
+        {
+            var client = _clientFactory.CreateClient();
+            var responseMessage = await client.PutAsync($"https://localhost:7274/api/Bookings/BookingStatusCancelled?id={id}", null);
+            
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return NoContent();
         }
     }
 }

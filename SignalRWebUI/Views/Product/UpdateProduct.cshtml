@@ -49,6 +49,15 @@
                                 <input type="text" class="form-control" asp-for="Description" id="description">
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="description">Stok</label>
+                                <select class="form-control" asp-for="Status">
+                                    <option value="true">Mevcut</option>
+                                    <option value="false">Mevcut Değil</option>
+                               </select>
+                            </div>
+                        </div>
                         <div class="card-action">
                             <button class="btn btn-primary">Ürünü Güncelle</button>
                         </div>

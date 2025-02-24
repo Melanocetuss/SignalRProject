@@ -36,7 +36,16 @@
 									<tr>
 										<td>@item.Description</td>
 										<td>@item.Date.ToShortDateString()</td>
-										<td>@item.Status</td>										
+										<td>
+                                            @if (item.Status == true)
+                                            {
+                                                <span class="badge badge-info">Okundu</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-dark">Okunmadı</span>
+                                            }
+										</td>										
 										<td><a href="/Notification/NotificationStatusChangeTrue/@item.NotificationID" class="btn btn-outline-warning btn-rounded">Okundu</a></td>
 										<td><a href="/Notification/NotificationStatusChangeFalse/@item.NotificationID" class="btn btn-outline-secondary btn-rounded">Okunmadı</a></td>
 										<td><a href="/Notification/RemoveNotification/@item.NotificationID" class="btn btn-outline-danger btn-rounded">Sil</a></td>

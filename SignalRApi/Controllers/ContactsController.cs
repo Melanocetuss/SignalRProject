@@ -37,7 +37,7 @@ namespace SignalRApi.Controllers
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
             var contactEntity = _mapper.Map<Contact>(createContactDto);
-            _mapper.Map<Contact>(createContactDto);
+            _contactService.TAdd(contactEntity);
             return Ok("İletişim Eklendi");
         }
 

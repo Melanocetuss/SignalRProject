@@ -22,7 +22,9 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultTestimonialDto>>(jsonData);
 
-                return View(values);
+                var filteredValues = values.Where(x => x.Status == true).ToList();
+
+                return View(filteredValues);
             }
 
             return View();

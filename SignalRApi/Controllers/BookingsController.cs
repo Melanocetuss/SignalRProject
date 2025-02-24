@@ -55,5 +55,19 @@ namespace SignalRApi.Controllers
             _bookingService.TUpdate(bookingEntity);
             return Ok("Rezervasyon Güncellendi");
         }
+
+        [HttpPut("BookingStatusApproved")]
+        public IActionResult BookingStatusApproved(int id)
+        {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok("Rezervasyon Onaylandı");
+        }
+
+        [HttpPut("BookingStatusCancelled")]
+        public IActionResult BookingStatusCancelled(int id)
+        {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Rezervasyon İptal Edildi");
+        }
     }
 }

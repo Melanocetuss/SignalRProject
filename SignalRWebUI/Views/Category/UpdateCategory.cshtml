@@ -5,30 +5,38 @@
 }
 
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Kategori İşelemleri</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<form method="post">
-					<div class="card">
-						<div class="card-header">
-							<div class="card-title">Yeni Kategori Girişi</div>
-						</div>
-						<div class="card-body">
-							<input type="hidden" asp-for="CategoryID"/>
-							<div class="form-group">
-								<label for="categoryname">Kategori Adı Giriniz</label>
-								<input type="text" class="form-control" id="categoryname" asp-for="Name">
-							</div>
+    <div class="container-fluid">
+        <h4 class="page-title">Kategori İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Kategori Güncelle</h5>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" asp-for="CategoryID" />
 
-							<div class="card-action">
-								<button class="btn btn-primary">Kategoriyi Güncelle</button>
-							</div>
+                            <div class="form-group">
+                                <label for="categoryname" class="form-label">Kategori Adı</label>
+                                <input type="text" class="form-control" id="categoryname" asp-for="Name">
+                            </div>
 
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>		
+                            <div class="form-group mt-3">
+                                <label for="status" class="form-label">Kategori Durumu</label>
+                                <select class="form-control" asp-for="Status" id="status">
+                                    <option value="true">Menüde Gözüküyor</option>
+                                    <option value="false">Menüde Gözükmüyor</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="btn btn-success">Kategoriyi Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

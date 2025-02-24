@@ -34,7 +34,16 @@
                                     <tr>
                                         <td><img src="@item.ImageUrl" width="50" height="50" style="margin-right:10px" />@item.Name</td>
                                         <td>@item.Comment</td>
-                                        <td>@item.Status</td>
+                                        <td>
+                                            @if(item.Status == true)
+                                            {
+                                                <span class="badge badge-success">Aktif</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Pasif</span>
+                                            }
+                                        </td>
                                         <td><a href="/Testimonial/RemoveTestimonial/@item.TestimonialID" class="btn btn-outline-danger btn-rounded">Sil</a></td>
                                         <td><a href="/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>

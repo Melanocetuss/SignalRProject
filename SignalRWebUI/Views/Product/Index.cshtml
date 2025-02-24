@@ -23,9 +23,10 @@
 									<th scope="col">Resim Ve Ürün Adı</th>
 									<th scope="col">Fiyat</th>
 									<th scope="col">Kategori Adı</th>
-									<th scope="col">Durumu</th>
+									<th scope="col">Stok</th>
 									<th scope="col">Sil</th>
 									<th scope="col">Güncelle</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -33,12 +34,21 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td><img src="@item.ImageUrl" width="50" height="50" style="margin-right:10px" />@item.Name</td>
+										<th><img src="@item.ImageUrl" width="50" height="50" style="margin-right:10px" />@item.Name</th>
 										<td>@item.Price ₺</td>
 										<td>@item.CategoryName</td>
-										<td>@item.Status</td>
+										<td>
+											@if (item.Status == true)
+											{
+												<span class="badge badge-success">Mevcut</span>
+											}
+											else
+											{
+												<span class="badge badge-danger">Mevcut Değil</span>
+											}
+										</td>
 										<td><a href="/Product/RemoveProduct/@item.ProductID" class="btn btn-outline-danger btn-rounded">Sil</a></td>
-										<td><a href="/Product/UpdateProduct/@item.ProductID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+										<td><a href="/Product/UpdateProduct/@item.ProductID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>	
 									</tr>
 								}
 

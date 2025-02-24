@@ -21,19 +21,25 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
             // Kategoriler ve Ürünler için liste oluştur
             var categories = new List<ResultCategoryDto>();
             var products = new List<ResultProductWithCategoriesDto>();
-            
+
             var productResponse = await client.GetAsync("https://localhost:7274/api/Products");
             if (productResponse.IsSuccessStatusCode)
             {
                 var productJsonData = await productResponse.Content.ReadAsStringAsync();
-                products = JsonConvert.DeserializeObject<List<ResultProductWithCategoriesDto>>(productJsonData);
+                var allProducts = JsonConvert.DeserializeObject<List<ResultProductWithCategoriesDto>>(productJsonData);
+
+                // Status'u "true" olan ürünleri listele
+                products = allProducts.Where(p => p.Status).ToList();
             }
 
             var categoryResponse = await client.GetAsync("https://localhost:7274/api/Categories");
             if (categoryResponse.IsSuccessStatusCode)
             {
                 var categoryJsonData = await categoryResponse.Content.ReadAsStringAsync();
-                categories = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(categoryJsonData);
+                var allCategories = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(categoryJsonData);
+
+                // Status'u "true" olan kategorileri listele
+                categories = allCategories.Where(c => c.Status).ToList();
             }
 
             // ViewModel Oluştur ve Doldur
