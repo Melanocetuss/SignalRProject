@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetAboutDto>(value));
         }
 
         [HttpPost]

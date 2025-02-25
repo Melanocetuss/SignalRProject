@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         public IActionResult GetOrder(int id)
         {
             var value = _orderService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetOrderDto>(value));
         }
 
         [HttpPost]

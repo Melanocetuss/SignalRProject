@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         public IActionResult GetBooking(int id)
         {
             var value = _bookingService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetBookingDto>(value));
         }
 
         [HttpPost]

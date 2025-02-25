@@ -30,7 +30,7 @@ namespace SignalRApi.Controllers
         public IActionResult GetNotification(int id) 
         {
             var value = _notificationService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetNotificationDto>(value));
         }
 
         [HttpPost]

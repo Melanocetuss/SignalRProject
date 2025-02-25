@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         [HttpGet("GetMenuTable")]
         public IActionResult GetMenuTable(int id)
         {
-            var value = _mapper.Map<ResultMenuTableDto>(_menuTableService.TGetByID(id));
+            var value = _mapper.Map<GetMenuTableDto>(_menuTableService.TGetByID(id));
             return Ok(value);
         }
 

@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         public IActionResult GetFeature(int id)
         {
             var value = _featureService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetFeatureDto>(value));
         }
 
         [HttpPost]
