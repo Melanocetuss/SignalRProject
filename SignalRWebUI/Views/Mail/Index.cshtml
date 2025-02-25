@@ -1,0 +1,61 @@
+﻿@model CreateMailDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<!-- TinyMCE'nin Doğru Çalışması İçin API Key Kullan -->
+<script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        tinymce.init({
+            selector: 'textarea[name="Body"]', // ASP.NET Core’un ürettiği 'name' ile bağla
+            height: 300, // Editör yüksekliği
+            menubar: false, // Üst menüyü kaldır
+            readonly: false, // Read-Only mod kapalı
+            plugins: [
+                'advlist autolink lists link charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                      alignleft aligncenter alignright alignjustify | \
+                      bullist numlist outdent indent | removeformat | help'
+        });
+    });
+</script>
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Mail Gönder</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Mail Gönder</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="receiverMail" class="form-label">Alıcı Mail Adresi</label>
+                                <input type="email" class="form-control" asp-for="ReceiverMail" placeholder="Alıcı Mail Adresi giriniz...">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Konu</label>
+                                <input type="text" class="form-control" asp-for="Subject" placeholder="Konuyu giriniz...">
+                            </div>
+                            <div class="form-group">
+                                <label for="body" class="form-label">Mesajınız</label>
+                                <textarea rows="5" class="form-control" asp-for="Body" placeholder="Mesajınızı giriniz..."></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success">Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

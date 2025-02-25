@@ -116,8 +116,27 @@
 		});
 
 		// Proggress Bar
-		connection.on("ReceiveProggressBarMenuTableCount", (ProggressBarMenuTableCount) => {
-			$("#ProggressBarMenuTableCount").text(ProggressBarMenuTableCount);
+		connection.on("ReceiveTotalMenuTableCount", (TotalMenuTableCount) => {
+			let toplamMasa = 16;
+			let yuzde = (TotalMenuTableCount / toplamMasa) * 100;
+			$("#TotalMenuTableCount").empty();
+			$("#TotalMenuTableCount").append(`
+											  <div class="d-flex justify-content-between mb-1">
+													<span class="text-muted">Toplam Masa Boş Masa Grafik</span>
+													<span class="text-muted fw-bold">${TotalMenuTableCount}</span>
+											  </div>
+											  <div class="progress mb-2" style="height: 7px;">
+													<div class="progress-bar bg-success" role="progressbar"
+														style="width: ${yuzde}%"
+														aria-valuenow="${yuzde}"
+														aria-valuemin="0"
+														aria-valuemax="100"
+														data-toggle="tooltip"
+														data-placement="top"
+														title="${yuzde.toFixed(1)}%">
+													</div>
+											  </div>
+											`);
 		});
 	});
 </script>

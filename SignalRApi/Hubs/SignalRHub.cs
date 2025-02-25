@@ -176,6 +176,15 @@ namespace SignalRApi.Hubs
             var proggressBarMenuTableCount = await proggressBarMenuTableCountResponseMessage.Content.ReadAsStringAsync();
             await Clients.All.SendAsync("ReceiveProggressBarMenuTableCount", proggressBarMenuTableCount);
             #endregion
+
+            #region totalMenuTableCountProggres
+            var totalMenuTableCountResponseMessage = await client.GetAsync("https://localhost:7274/api/MenuTables/GetMenuTableByStatusFalseCount");
+            var totalMenuTableCount = await totalMenuTableCountResponseMessage.Content.ReadAsStringAsync();
+            if (int.TryParse(totalMenuTableCount, out int count))
+            {
+                await Clients.All.SendAsync("ReceiveTotalMenuTableCount", count);
+            }
+            #endregion
         }
 
         public async Task SendBookingList()
