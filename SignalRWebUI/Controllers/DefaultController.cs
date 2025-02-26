@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUI.Dtos.BasketDtos;
 using SignalRWebUI.Dtos.BookingDtos;
 using System.Net.Http;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -14,12 +15,13 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-
+        
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+      
 
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDto createBookingDto)

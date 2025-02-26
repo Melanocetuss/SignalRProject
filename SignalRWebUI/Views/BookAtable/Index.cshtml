@@ -17,17 +17,17 @@
                 <div class="form_container">
                     <form method="post">
                         <div>
-                            <input type="text" class="form-control" placeholder="İsminiz" asp-for="Name"/>
+                            <input type="text" class="form-control" placeholder="İsminiz" asp-for="Name" />
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="Phone"/>
+                            <input type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="Phone" />
                         </div>
                         <div>
-                            <input type="email" class="form-control" placeholder="Mail Adresiniz" asp-for="Email"/>
+                            <input type="email" class="form-control" placeholder="Mail Adresiniz" asp-for="Email" />
                         </div>
                         <div>
                             <select class="form-control nice-select wide" asp-for="PersonCount">
-                                <option value="" disabled selected >Kaç Kişisiniz ?</option>
+                                <option value="" disabled selected>Kaç Kişisiniz ?</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -38,7 +38,7 @@
                         <div>
                             <input type="date" class="form-control" asp-for="Date">
                         </div>
-                        <input type="hidden" class="form-control" readonly asp-for="Description" value="Rezervasyon Alındı">
+                        <input type="hidden" readonly value="Rezervasyon Alındı" asp-for="Description" />
                         <div class="btn_box">
                             <button>
                                 Şimdi Rezervasyon Yap

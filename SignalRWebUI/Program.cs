@@ -15,7 +15,6 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Signal
 #endregion
 
 // Add services to the container.
-
 #region Autorization
 builder.Services.AddControllersWithViews(opt =>
 {
@@ -31,6 +30,15 @@ builder.Services.ConfigureApplicationCookie(opt =>
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
+
+// 404 Status Code Page
+app.UseStatusCodePages(async x =>
+{
+    if(x.HttpContext.Response.StatusCode == 404)
+    {
+        x.HttpContext.Response.Redirect("/Error/NotFound404Page");
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

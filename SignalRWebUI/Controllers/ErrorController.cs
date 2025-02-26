@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace SignalRWebUI.Controllers
 {
     [AllowAnonymous]
-    public class DefaultAboutController : Controller
+    public class ErrorController : Controller
     {
-        public IActionResult Index()
+        public IActionResult NotFound404Page()
         {
-            ViewBag.SubPage = "sub_page";
-            ViewBag.NavbarDiv = "</div>";
             return View();
         }
     }
