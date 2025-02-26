@@ -1,0 +1,51 @@
+﻿@model List<ResultTastyApiDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="container-fluid py-5">
+    <nav class="breadcrumb bg-dark p-3 rounded">
+        <a class="breadcrumb-item text-white" href="/Default/Index/">Ana Sayfa</a>
+        <a class="breadcrumb-item text-white" href="/Menu/Index/">Tasty Yemek</a>
+        <span class="breadcrumb-item text-warning active">Yemek Tarifi</span>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row px-x-5">
+            <div class="table-responsive">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead class="bg-dark text-white">
+                            <tr style="font-size: 1.2rem;">
+                                <th>Ürün Resmi</th>
+                                <th>Ürün Adı</th>
+                                <th>Hazırlama Süresi</th>
+                                <th>Video Linki</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><img src="@item.thumbnail_url" style="width:65px; height:65px;" /></td>
+                                <td>@item.name</td>
+                                @if(item.total_time_minutes == 0)
+                                {
+                                    <td>15</td>
+                                }
+                                else
+                                {
+                                    <td>@item.total_time_minutes</td>
+                                }
+                                <td><a href="@item.original_video_url" target="_blank" class="btn btn-warning">Tarifi İzle</a></td>                                
+                            </tr>                               
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

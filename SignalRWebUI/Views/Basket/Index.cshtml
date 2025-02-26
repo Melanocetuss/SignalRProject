@@ -8,18 +8,17 @@
 }
 
 <div class="container py-5">
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb bg-light p-3 rounded">
-        <a class="breadcrumb-item text-dark" href="/Default/Index/">Ana Sayfa</a>
-        <a class="breadcrumb-item text-dark" href="/Menu/Index/">Menü</a>
-        <span class="breadcrumb-item active">Sepetiniz</span>
+    <nav class="breadcrumb bg-dark p-3 rounded">
+        <a class="breadcrumb-item text-white" href="/Default/Index/">Ana Sayfa</a>
+        <a class="breadcrumb-item text-white" href="/Menu/Index/">Menü</a>
+        <span class="breadcrumb-item text-warning active">Sepetiniz</span>
     </nav>
 
     <div class="row">
         <!-- Basket Table (Sepet) -->
         <div class="col-lg-8 mb-4">
             <div class="card shadow-lg">
-                <div class="card-header bg-secondary text-white text-center">
+                <div class="card-header bg-dark text-white text-center">
                     <h3>Sepetiniz</h3>
                 </div>
                 <div class="card-body p-4">
@@ -39,7 +38,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr style="font-size: 1.1rem;">
-                                        <td><img src="@item.ProductImageUrl" class="img-fluid rounded" width="90" height="90" /></td> <!-- Daha büyük resim -->
+                                        <td><img src="@item.ProductImageUrl" class="img rounded" width="90" height="90" /></td> <!-- Daha büyük resim -->
                                         <td>@item.ProductName</td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
