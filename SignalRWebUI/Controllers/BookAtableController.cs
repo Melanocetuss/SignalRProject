@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalRWebUI.Dtos.ApiValidationError;
 using SignalRWebUI.Dtos.BookingDtos;
 using System.Text;
 
@@ -31,9 +32,9 @@ namespace SignalRWebUI.Controllers
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7274/api/Bookings", stringContent);
 
-            if (responseMessage.IsSuccessStatusCode)
+            if(responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Default");
             }
 
             return View();
