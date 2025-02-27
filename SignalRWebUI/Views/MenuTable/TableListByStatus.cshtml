@@ -4,12 +4,15 @@
 	Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+<!-- MenuTable CSS -->
+@await Component.InvokeAsync("_MenuTableCSSComponentPartial")
+
 <!-- SignalR-->
 @await Component.InvokeAsync("_SignalRScriptMenuTableComponentPartial")
 
 <div class="content">
-	<div class="container-fluid">
+	<div class="container">
 		<h4 class="page-title">Anlık Masa Durumları</h4>
-		<div id="menuTableList"></div>			
+		<div id="menuTableList" class="row px-xl-5"></div>
 	</div>
 </div>

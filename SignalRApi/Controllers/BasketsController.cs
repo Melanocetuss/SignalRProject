@@ -40,7 +40,7 @@ namespace SignalRApi.Controllers
 
             // Sepette bu ürün var mı
             var existingBasketItem = _context.Baskets
-                .FirstOrDefault(x => x.ProductID == createBasketDto.ProductID && x.MenuTableID == 2);
+                .FirstOrDefault(x => x.ProductID == createBasketDto.ProductID && x.MenuTableID == 2); // Statik Geliyor
 
             if (existingBasketItem != null)
             {
@@ -59,7 +59,7 @@ namespace SignalRApi.Controllers
                 {
                     ProductID = createBasketDto.ProductID,
                     Count = 1,
-                    MenuTableID = 2,
+                    MenuTableID = 2, // Statik Geliyor
                     Price = productPrice,
                     TotalPrice = productPrice
                 };

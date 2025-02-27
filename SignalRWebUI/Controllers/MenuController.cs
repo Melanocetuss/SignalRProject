@@ -20,14 +20,15 @@ namespace SignalRWebUI.Controllers
         {
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
+            
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id)
+        public async Task<IActionResult> AddBasket(int ProductID)
         {
-            CreateBasketDto createBasketDto =  new CreateBasketDto();
-            createBasketDto.ProductID = id;
+            CreateBasketDto createBasketDto = new CreateBasketDto();
+            createBasketDto.ProductID = ProductID;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
