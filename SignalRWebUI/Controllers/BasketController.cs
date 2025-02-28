@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.EntityLayer.Entities;
 using SignalRWebUI.Dtos.BasketDtos;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             int? menuTableID = HttpContext.Session.GetInt32("MenuTableID");
-
+            ViewBag.MenuTableID = menuTableID.Value;
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
 
