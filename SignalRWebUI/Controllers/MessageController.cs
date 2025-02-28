@@ -1,20 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using SignalR.EntityLayer.Entities;
+using SignalRWebUI.Dtos.IdentityDtos;
 
 namespace SignalRWebUI.Controllers
 {
     public class MessageController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<AppUser> _userManager;
+        public MessageController(UserManager<AppUser> userManager)
         {
-            ViewBag.SubPage = "sub_page";
-            ViewBag.NavbarDiv = "</div>";
-            return View();
+            _userManager = userManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var value = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserEditDto userEditDto = new UserEditDto
+            {
+                Username = value.UserName
+            };
+            return View(userEditDto);
         }
 
         public IActionResult ClientUserCount()
         {
-            ViewBag.SubPage = "sub_page";
-            ViewBag.NavbarDiv = "</div>";
             return View();
         }
     }

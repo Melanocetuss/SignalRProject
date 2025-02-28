@@ -1,10 +1,11 @@
-﻿@{
+﻿@model UserEditDto
+@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/UILayout/Index.cshtml";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
 <section class="food_section py-5" style="background-color: #f8f9fa;">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="mt-3 p-3 border rounded-4" style="border: 1px solid #FFD700;">
@@ -20,7 +21,7 @@
                     <!-- Username Input -->
                     <div class="mb-3">
                         <label class="form-label">Kullanıcı Adınız:</label>
-                        <input type="text" class="form-control" id="userinput" placeholder="Kullanıcı adınızı girin" />
+                        <input readonly type="text" class="form-control" id="userinput" asp-for="Username" />
                     </div>
 
                     <!-- Message Input -->
