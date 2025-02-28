@@ -50,4 +50,4 @@ Bu projede **SignalR** aşağıdaki işlevlerde kullanılmıştır:
 ![resim](readmeImage/7.png)
 ![resim](readmeImage/8.png)
 ![resim](readmeImage/9.png)
-![resim](readmeImage/API.png)
+![resim](readmeImage/Api.png)
