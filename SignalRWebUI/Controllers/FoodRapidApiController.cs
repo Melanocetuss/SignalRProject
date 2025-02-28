@@ -16,6 +16,8 @@ namespace SignalRWebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
+            int? menuTableID = HttpContext.Session.GetInt32("MenuTableID");
+            ViewBag.MenuTableID = menuTableID.Value;
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
             
