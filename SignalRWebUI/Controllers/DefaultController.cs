@@ -20,7 +20,10 @@ namespace SignalRWebUI.Controllers
         [HttpGet]
         public IActionResult Index(int MenuTableID)
         {
+            // Qr İle Masa Numarası Alıyoruz Burda
+            HttpContext.Session.SetInt32("MenuTableID", MenuTableID);
             ViewBag.MenuTableID = MenuTableID;
+
             return View();
         }
 

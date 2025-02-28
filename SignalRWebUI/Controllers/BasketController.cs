@@ -17,11 +17,13 @@ namespace SignalRWebUI.Controllers
         
         public async Task<IActionResult> Index()
         {
+            int? menuTableID = HttpContext.Session.GetInt32("MenuTableID");
+
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7274/api/Baskets?id=1");
+            var responseMessage = await client.GetAsync($"https://localhost:7274/api/Baskets?id={menuTableID.Value}");
 
             if (responseMessage.IsSuccessStatusCode) 
             {

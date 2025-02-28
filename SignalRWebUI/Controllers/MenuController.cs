@@ -15,22 +15,33 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-
-        [Route("Menu/Index/{MenuTableID}")]
-        public IActionResult Index(int MenuTableID)
+       
+        public IActionResult Index()
         {
+            int? menuTableID = HttpContext.Session.GetInt32("MenuTableID");
+
+            if (menuTableID.HasValue)
+            {
+                ViewBag.MenuTableID = menuTableID.Value;
+            }
+            else
+            {
+                return NotFound();
+            }
+
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
           
-            ViewBag.MenuTableID = MenuTableID;
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int ProductID, int MenuTableID)
+        public async Task<IActionResult> AddBasket(int ProductID)
         {
-            if (MenuTableID <= 0 || ProductID <= 0)
+            int? menuTableID = HttpContext.Session.GetInt32("MenuTableID");
+
+            if (!menuTableID.HasValue || ProductID <= 0)
             {
                 return BadRequest("Geçersiz MenuTableID veya ProductID!");
             }
@@ -38,7 +49,7 @@ namespace SignalRWebUI.Controllers
             CreateBasketDto createBasketDto = new CreateBasketDto()
             {
                 ProductID = ProductID,
-                MenuTableID = MenuTableID
+                MenuTableID = menuTableID.Value
             };
 
             var client = _httpClientFactory.CreateClient();
@@ -49,7 +60,6 @@ namespace SignalRWebUI.Controllers
 
             if (responseMessage.IsSuccessStatusCode)
             {
-                // JSON olarak başarılı yanıt döndür
                 return Json(new { success = true, message = "Ürün sepete eklendi!", redirectUrl = "/Basket/Index" });
             }
 
