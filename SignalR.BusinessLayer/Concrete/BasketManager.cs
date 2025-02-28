@@ -12,6 +12,12 @@ namespace SignalR.BusinessLayer.Concrete
         {
            _basketDal = basketDal;
         }
+
+        public void TAddBasket(int MenuTableID, int ProductID)
+        {
+            _basketDal.AddBasket(MenuTableID, ProductID);
+        }
+
         public List<ResultBasketDto> TGetBasketByMenuTableNumber(int id)
         {
             return _basketDal.GetBasketByMenuTableNumber(id);

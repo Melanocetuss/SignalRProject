@@ -27,17 +27,23 @@
 <!-- Modal Script-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    function ShowProductId(value){
-        
-        var id = value;
+    function ShowProductId(productId, productName) {
+        console.log("📢 Ürün ID:", productId);
+        console.log("📢 Ürün Adı:", productName);
+
         $.ajax({
             type: 'POST',
-            data: { ProductID : id },
-            url: "/Menu/AddBasket/" + id,          
-            contentType: 'json',
-            success: function(){
-                swal("Ürün Sepete Eklendi", "Seçiminizi Yaptınız", "success");
+            url: "/Menu/AddBasket/",
+            data: { ProductID: productId, MenuTableID: 1 },
+            success: function (response) {
+                console.log("✅ Başarılı:", response);
+                swal(productName + " sepete eklendi!", "Seçiminizi yaptınız.", "success");
+            },
+            error: function (xhr, status, error) {
+                console.error("❌ Hata:", xhr.status, xhr.responseText);
+                swal("Hata!", "Ürün sepete eklenemedi.", "error");
             }
         });
     }
+
 </script>

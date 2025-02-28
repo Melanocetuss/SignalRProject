@@ -1,4 +1,5 @@
 ﻿@model ProductCategoryViewModel
+@using System.Net
 <section class="food_section layout_padding-bottom">
     <div class="container">
         <div class="heading_container heading_center">
@@ -37,7 +38,9 @@
                                     <h6>
                                         @product.Price ₺
                                     </h6>
-                                        <a href="javascript:void(0)" onclick="ShowProductId(@product.ProductID)">
+                                        <a href="javascript:void(0)" onclick="ShowProductId(@product.ProductID, '@Html.Raw(WebUtility.HtmlEncode(product.Name))')">
+
+
                                         <i class="fas fa-shopping-cart text-white"></i>
                                     </a>
                                 </div>

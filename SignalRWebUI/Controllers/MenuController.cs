@@ -20,7 +20,7 @@ namespace SignalRWebUI.Controllers
         {
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
-            
+
             return View();
         }
 
@@ -29,13 +29,14 @@ namespace SignalRWebUI.Controllers
         {
             CreateBasketDto createBasketDto = new CreateBasketDto();
             createBasketDto.ProductID = ProductID;
+            createBasketDto.MenuTableID = 1;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7274/api/Baskets", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index" ,"Default");
             }
 
             return NoContent();
