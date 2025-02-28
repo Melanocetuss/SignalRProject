@@ -20,30 +20,47 @@
 <!-- custom js -->
 <script src="~/feane-1.0.0/js/custom.js"></script>
 
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-</script>
-
 <!-- Modal Script-->
+<script>var menuTableID = @ViewBag.MenuTableID;</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    function ShowProductId(productId, productName) {
-        console.log("📢 Ürün ID:", productId);
-        console.log("📢 Ürün Adı:", productName);
+function ShowProductId(productId, productName) {
+    console.log("📢 Ürün ID:", productId);
+    console.log("📢 Ürün Adı:", productName);
+    console.log("📢 Masa ID:", menuTableID);
 
-        $.ajax({
-            type: 'POST',
-            url: "/Menu/AddBasket/",
-            data: { ProductID: productId, MenuTableID: 1 },
-            success: function (response) {
-                console.log("✅ Başarılı:", response);
-                swal(productName + " sepete eklendi!", "Seçiminizi yaptınız.", "success");
-            },
-            error: function (xhr, status, error) {
-                console.error("❌ Hata:", xhr.status, xhr.responseText);
-                swal("Hata!", "Ürün sepete eklenemedi.", "error");
-            }
-        });
+    if (!menuTableID || menuTableID <= 0) {
+        console.error("❌ Hata: MenuTableID bulunamadı!");
+        swal("Hata!", "Masa numarası belirlenemedi.", "error");
+        return;
     }
 
+    $.ajax({
+        type: 'POST',
+        url: "/Menu/AddBasket/",
+        data: { ProductID: productId, MenuTableID: menuTableID },
+        success: function (response) {
+            console.log("✅ Başarılı:", response);
+
+            if (response.success) {
+                swal({
+                    title: "Başarılı!",
+                    text: response.message,
+                    icon: "success",
+                    buttons: ["Alışverişe Devam Et", "Sepete Git"]
+                }).then((willRedirect) => {
+                    if (willRedirect) {
+                        window.location.href = response.redirectUrl;
+                    }
+                });
+            } else {
+                swal("Hata!", response.message, "error");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("❌ Hata:", xhr.status, xhr.responseText);
+            swal("Hata!", "Ürün sepete eklenemedi.", "error");
+        }
+    });
+}
 </script>

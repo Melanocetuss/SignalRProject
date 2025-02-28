@@ -14,14 +14,14 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-
+        
         public async Task<IActionResult> Index()
         {
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7274/api/Baskets?id=2");
+            var responseMessage = await client.GetAsync($"https://localhost:7274/api/Baskets?id=1");
 
             if (responseMessage.IsSuccessStatusCode) 
             {

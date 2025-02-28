@@ -16,30 +16,44 @@ namespace SignalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public IActionResult Index()
+        [Route("Menu/Index/{MenuTableID}")]
+        public IActionResult Index(int MenuTableID)
         {
             ViewBag.SubPage = "sub_page";
             ViewBag.NavbarDiv = "</div>";
-
+          
+            ViewBag.MenuTableID = MenuTableID;
             return View();
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int ProductID)
+        public async Task<IActionResult> AddBasket(int ProductID, int MenuTableID)
         {
-            CreateBasketDto createBasketDto = new CreateBasketDto();
-            createBasketDto.ProductID = ProductID;
-            createBasketDto.MenuTableID = 1;
+            if (MenuTableID <= 0 || ProductID <= 0)
+            {
+                return BadRequest("Geçersiz MenuTableID veya ProductID!");
+            }
+
+            CreateBasketDto createBasketDto = new CreateBasketDto()
+            {
+                ProductID = ProductID,
+                MenuTableID = MenuTableID
+            };
+
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
             var responseMessage = await client.PostAsync("https://localhost:7274/api/Baskets", stringContent);
+
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index" ,"Default");
+                // JSON olarak başarılı yanıt döndür
+                return Json(new { success = true, message = "Ürün sepete eklendi!", redirectUrl = "/Basket/Index" });
             }
 
-            return NoContent();
+            return Json(new { success = false, message = "Ürün eklenirken hata oluştu." });
         }
     }
 }

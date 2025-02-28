@@ -15,13 +15,14 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        
+
+        [Route("Default/Index/{MenuTableID}")]
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int MenuTableID)
         {
+            ViewBag.MenuTableID = MenuTableID;
             return View();
         }
-      
 
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDto createBookingDto)
