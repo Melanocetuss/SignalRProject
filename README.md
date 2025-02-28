@@ -40,4 +40,14 @@ Bu projede **SignalR** aşağıdaki işlevlerde kullanılmıştır:
 - **Mesajlaşma Özellikleri**: Kullanıcılar ve yönetim arasında gerçek zamanlı mesajlaşma.
 
 ## 🖼️ Proje Görselleri
-[resim]
+![resim](readmeImage/11.png)
+![resim](readmeImage/1.png)
+![resim](readmeImage/2.png)
+![resim](readmeImage/3.png)
+![resim](readmeImage/4.png)
+![resim](readmeImage/5.png)
+![resim](readmeImage/6.png)
+![resim](readmeImage/7.png)
+![resim](readmeImage/8.png)
+![resim](readmeImage/9.png)
+![resim](readmeImage/API.png)
