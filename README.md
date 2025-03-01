@@ -22,13 +22,6 @@ SignalRProject
 ├── SignalRProject.WebUI        
 ```
 
-## 📡 SignalR Kullanımı
-Bu projede **SignalR** aşağıdaki işlevlerde kullanılmıştır:
-- **Masa Doluluk Kontrolü.**
-- **Anlık Bildirimler**: Kullanıcılara sipariş ve rezervasyon durumları hakkında anlık bilgilendirme yapılır.
-- **Gerçek Zamanlı Sepet İşlemleri**: Kullanıcıların sipariş sepeti anlık olarak güncellenir.
-- **Mesajlaşma Özellikleri**: Kullanıcılar ve yönetim arasında gerçek zamanlı mesajlaşma.
-
 ## 🖼️ Proje Görselleri
 ![resim](readmeImage/11.png)
 ![resim](readmeImage/1.png)
