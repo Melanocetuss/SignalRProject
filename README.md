@@ -22,16 +22,6 @@ SignalRProject
 ├── SignalRProject.WebUI        
 ```
 
-## 🛠 Kullanılan Teknolojiler
-- **ASP.NET Core 6.0**
-- **C#**
-- **Entity Framework Core**
-- **SignalR** (Gerçek zamanlı haberleşme)
-- **MSSQL** (Veritabanı yönetimi)
-- **JavaScript, Ajax** (Dinamik içerik yönetimi)
-- **HTML, CSS, Bootstrap** (UI tasarımı)
-- **Mail Gönderme İşlemleri**
-
 ## 📡 SignalR Kullanımı
 Bu projede **SignalR** aşağıdaki işlevlerde kullanılmıştır:
 - **Masa Doluluk Kontrolü.**
