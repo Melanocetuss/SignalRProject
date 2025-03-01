@@ -1,6 +1,6 @@
 # Restoran Yönetim Sistemi - N-Tier Architecture ve SignalR
 
-**Restoran Yönetim Sistemi**, **ASP.NET Core 6.0** kullanılarak geliştirilmiş gerçek zamanlı bir sipariş yönetim sistemidir. Bu proje, **N-Tier Architecture** kullanarak modüler ve ölçeklenebilir bir yapı sunarken, **SignalR** ile anlık bildirimler, mesajlaşma ve gerçek zamanlı istatistikler sağlamaktadır.
+**Restoran Yönetim Sistemi**, **ASP.NET Core 8.0** kullanılarak geliştirilmiş gerçek zamanlı bir sipariş yönetim sistemidir. Bu proje, **N-Tier Architecture** kullanarak modüler ve ölçeklenebilir bir yapı sunarken, **SignalR** ile anlık bildirimler, mesajlaşma ve gerçek zamanlı istatistikler sağlamaktadır.
 
 Bu sistem, restoran işletmelerinin sipariş süreçlerini verimli bir şekilde yönetmelerini kolaylaştırırken, kullanıcı deneyimini artırmak için anlık güncellemeler sunmaktadır.
 
