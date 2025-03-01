@@ -17,7 +17,7 @@ Bu sistem, restoran işletmelerinin sipariş süreçlerini verimli bir şekilde 
 SignalRProject
 ├── SignalRProject.Application  # İş mantığı ve servisler (N-Tier Architecture)
 ├── SignalRProject.Domain       # Veri modelleri ve iş kuralları (N-Tier Architecture)
-├── SignalRProject.Infrastructure # Veri erişim ve servisler (N-Tier Architecture)
+├── SignalRProject.Entity # Veri erişim ve servisler (N-Tier Architecture)
 ├── SignalRProject.API          # Backend API katmanı
 ├── SignalRProject.WebUI        # Kullanıcı arayüzü
 ```
