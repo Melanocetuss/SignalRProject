@@ -15,7 +15,7 @@ Bu sistem, restoran işletmelerinin sipariş süreçlerini verimli bir şekilde 
 
 ```bash
 SignalRProject
-├── SignalRProject.Busnias  
+├── SignalRProject.BusinessLayer  
 ├── SignalRProject.DataAccessLayer       
 ├── SignalRProject.EntityLayer 
 ├── SignalRProject.API          
